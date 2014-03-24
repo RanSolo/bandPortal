@@ -24,6 +24,7 @@ Application.prototype.addCover = function(oldpath){
   var abspath = __dirname + '/../static';
   var relpath = '/img/' + dirname;
   fs.mkdirSync(abspath + relpath);
+
   var extension = path.extname(oldpath);
   relpath += '/cover' + extension;
   fs.renameSync(oldpath, abspath + relpath);

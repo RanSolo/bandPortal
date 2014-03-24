@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.DBNAME = 'application-test';
+process.env.DBNAME = 'application-test2';
 var app = require('../../app/app');
 var request = require('supertest');
 var fs = require('fs');
@@ -23,9 +23,9 @@ describe('applications', function(){
     var cmd = 'rm -rf ' + testdir;
 
     exec(cmd, function(){
-      var origfile = __dirname + '/../fixtures/theBand.jpg';
-      var copy1file = __dirname + '/../fixtures/shaggs.jpg';
-      var copy2file = __dirname + '/../fixtures/bad4good.jpg';
+      var origfile = __dirname + '/../fixtures/theband.png';
+      var copy1file = __dirname + '/../fixtures/theband-copy1.png';
+      var copy2file = __dirname + '/../fixtures/theband-copy2.png';
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
@@ -41,7 +41,6 @@ describe('applications', function(){
       .expect(200, done);
     });
   });
-
   describe('GET /applications/3', function(){
     var a1, a2, a3;
 
@@ -65,8 +64,7 @@ describe('applications', function(){
       .expect(200, done);
     });
   });
-/*
-
+  
   describe('GET /applications/new', function(){
     it('should display the new application html page', function(done){
       request(app)
@@ -77,12 +75,12 @@ describe('applications', function(){
 
   describe('POST /applications', function(){
     it('should create a new application and send user back to home', function(done){
-      var filename = __dirname + '/../fixtures/theBand.jpg';
+      var filename = __dirname + '/../fixtures/theband-copy1.png';
       request(app)
       .post('/applications')
       .attach('cover', filename)
-      .field('name', 'Test The Band')
-      .field('entryDate', '2014-02-25')
+      .field('name', 'Test theband')
+      .field('entryDate', '2012-03-25')
       .expect(302, done);
     });
   });
@@ -91,8 +89,8 @@ describe('applications', function(){
     var a1;
 
     beforeEach(function(done){
-      a1 = new Application({name:'Test A', entryDate:'2012-03-25'});
-      var oldname = __dirname + '/../fixtures/euro-copy1.jpg';
+      a1 = new Application({name:'Test The Band', entryDate:'2012-03-25'});
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
       a1.insert(function(){
         done();
@@ -100,12 +98,11 @@ describe('applications', function(){
     });
 
     it('should add a photo to the application', function(done){
-      var filename = __dirname + '/../fixtures/euro-copy2.jpg';
+      var filename = __dirname + '/../fixtures/theband-copy2.png';
       request(app)
       .post('/applications/' + a1._id.toString())
       .attach('photo', filename)
       .expect(302, done);
     });
   });
-*/
 });

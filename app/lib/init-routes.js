@@ -23,11 +23,11 @@ function load(app, fn){
   app.post('/register', d, users.create);
   app.get('/login', d, users.login);
   app.post('/login', d, users.authenticate);
-  app.post('/logout', d, users.logout);
-  app.get('/applications', d, applications.index);
-  app.get('/applications/fresh', d, applications.fresh);
+//  app.post('/logout', d, users.logout);
+  app.get('/applications', d,  applications.index);
+  app.post('/applications', d, applications.create);
+  app.get('/applications/new', d, applications.new);
   app.get('/applications/:id', d, applications.show);
-  app.post('/applications', d, applications.insert);
   app.post('/applications/:id', d, applications.photoAdd);
 
 
