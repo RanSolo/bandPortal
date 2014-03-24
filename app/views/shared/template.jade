@@ -1,0 +1,92 @@
+doctype html
+//[if IE 9]><html class="lt-ie10" lang="en" > <![endif]
+html(class='no-js', lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet', href='/css/normalize.css')
+    link(rel='stylesheet', href='/css/foundation.css')
+    link(rel='stylesheet', href='/less/app.css')
+    link(rel='stylesheet', href='/css/custom-theme/jquery-ui.css')
+    link(rel='stylesheet', href='/css/fullcalendar.css')
+    link(rel='stylesheet', href='/css/fullcalendar.print.css')
+    script(src='/js/vendor/modernizr.js')
+  body
+    nav.top-bar
+      ul.title-area
+        li.name
+          h1: a(href="/") The Title
+        li.toggle-topbar.menu-icon
+          a(href="#") Menu
+      section.top-bar-section
+        ul.left
+          li.name
+            input#search(type='search', placeholder='search...', result='0')
+        ul.right
+          li: a(href="/") Home
+          li.divider
+          if !user
+            li: a(href="/register") Register
+            li.divider
+            li: a(href="/login") Login
+          if user
+            li.divider
+            li: a(href='/')= user ? user.name : 'anon'
+            li:has-dropdown.not-click
+              a(href='/') &#9881;
+              ul.dropdown
+                li: a#showM Applicaton
+           //     li: a(href=/profile') Edit Profile
+                li divider
+                li.has=form
+                  form(action='/logout',method='post')
+                    button.alert.tiny.radius.expand Logout
+    .row
+      .small-12.columns
+        form#createApplication.hide
+          fieldset
+            #close close[x]
+            legend Create application
+            .row
+              .small-5.columns
+                label Bio/press
+                textarea(name='bio', rows=2, placeholder= 'I was born a poor hacker Chyld...')
+                label links - separate by commas
+                textarea(name='links', rows=2, placeholder= 'www.bandPortalRocksFaceFoRealDoe.oi')
+              .small-5.columns
+                label youtube
+
+  .row
+    .small-8.columns
+      #toolbar.ui-widget-header myPod
+        button#beginning got to beginning
+        button#rewind rewind
+        button#play play
+        button#stop stop
+        button#forward forward
+        button#end end
+        label(for='shuffle') Shuffle
+        input#shuffle(type='checkbox')
+        #mySliderDiv
+    .small-4.columns
+      ul
+      li#startRecording: a(href='#') Start recording
+      li#stopRecording: a(href='#') Stop recording
+      li#playback: a(href='#') Playbeck
+      li#upload: a(href='#') Upload
+      p.status  
+  .row
+    .small-12.columns
+      block content
+
+    script(src='/js/vendor/jquery.js')
+    script(src='/js/vendor/jquery-ui.js')
+    script(src='/js/vendor/fullcalendar.js')
+    script(src='/js/vendor/gcal.js')
+    script(src='//connect.soundcloud.com/sdk.js')
+    script(src='/js/vendor/foundation.min.js')
+    script(src='/js/vendor/lodash.js')
+    script(src='/js/vendor/moment.js')
+    script(src='/js/source/main.js')
+

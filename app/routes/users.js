@@ -18,7 +18,6 @@ exports.create = function(req, res){
 };
 
 exports.login = function(req, res){
-  console.log('OOOOOOOOOOOOOOOOOres', res);
   res.render('users/login', {title: 'Login User'});
 };
 

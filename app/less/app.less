@@ -1,6 +1,30 @@
-@bg-color: #99aa33;
+@bg-color: #000000;
+@color1: #6EF9FF;
 
 body{
   background-color: @bg-color;
 }
+h1{
+  color: @color1;
+}
+
+#stopRecording, #playBack, #upload{
+  display: none;
+}
+
+.status{
+  color: green;
+}
+
+#toolbar {
+  padding: 4px;
+  display: inline-block;
+}
+.hide{
+  display: none;
+}
+  /* support: IE7 */
+  *+html #toolbar {
+    display: inline;
+  }
 

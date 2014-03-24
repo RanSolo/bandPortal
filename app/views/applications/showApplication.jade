@@ -1,0 +1,47 @@
+extends ../shared/template
+
+block content
+  h4= title
+  //h1 Team 1: #{team1.name}
+  //h2 Team 2: #{team2.name}
+  //h1 Sport: #{meetup.sportName}
+  //h1 City: #{meetup.city}
+  //h1 Loyalty: #{loyalty.name}
+  //h1 Attendees: #{attendees}
+  #top
+    .small-4.columns
+      #author Author
+        p Santa
+    .small-4.columns
+      #teamL Loyalty
+        p Predators
+    .small-4.columns
+      #league League
+        p NFL
+        img#leagueImg
+    .row
+      .small-12.columns
+        #teamsVsM
+          #team1M team1
+            p "PREDATORS"
+            #cityM Tennessee
+          .vsM
+          #team2M team2
+            p "PECKERS"
+            #city2M Green Bay
+          #dateTime Date/Time
+            p "March 23 - 7:30 PM"
+          #citta City
+            p "Nashville"
+  #bottom
+    .small-6.columns
+      #barImg
+        img#barPic
+    .small-6.columns
+      #barName
+        p Jed's Sports Bar & Grille
+      #address
+        p 114 28th Ave N, Nashville, TN 37203 (615) 320-4399
+      #sportMap
+        img#mapPic
+
