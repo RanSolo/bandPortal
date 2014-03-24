@@ -41,7 +41,6 @@ describe('applications', function(){
       .expect(200, done);
     });
   });
-/*
 
   describe('GET /applications/3', function(){
     var a1, a2, a3;
@@ -66,6 +65,7 @@ describe('applications', function(){
       .expect(200, done);
     });
   });
+/*
 
   describe('GET /applications/new', function(){
     it('should display the new application html page', function(done){

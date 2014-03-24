@@ -41,7 +41,6 @@ Application.prototype.addPhoto = function(oldpath, name){
 
 Application.prototype.insert = function(fn){
   applications.insert(this, function(err, records){
-    console.log('00000000000records', records);
     fn(err);
   });
 };
