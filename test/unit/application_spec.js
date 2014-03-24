@@ -22,9 +22,9 @@ describe('Application', function(){
     var cmd = 'rm -rf ' + testdir;
 
     exec(cmd, function(){
-      var origfile = __dirname + '/../fixtures/theBand.jpg';
-      var copy1file = __dirname + '/../fixtures/bad4good.jpg';
-      var copy2file = __dirname + '/../fixtures/shaggs.gif';
+      var origfile = __dirname + '/../fixtures/theband.png';
+      var copy1file = __dirname + '/../fixtures/theband-copy1.png';
+      var copy2file = __dirname + '/../fixtures/theband-copy2.png';
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
@@ -33,7 +33,7 @@ describe('Application', function(){
     });
   });
 
-  describe('fresh', function(){
+  describe('new', function(){
     it('should create a new Application object', function(){
       var o = {};
       o.name = 'test The Band';
@@ -52,16 +52,18 @@ describe('Application', function(){
       o.name = 'test the Band';
       o.taken = '2010-03-25';
       var a1 = new Application(o);
-      var oldname = __dirname + '/../fixtures/bad4good.jpg';
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
-      expect(a1.cover).to.equal('/img/testtheband/cover.jpg');
+      expect(a1.cover).to.equal('/img/testtheband/cover.png');
     });
   });
+
   describe('#addPhoto', function(){
     var a1;
+
     beforeEach(function(done){
       a1 = new Application({name:'Test A', taken:'2012-03-25'});
-      var oldname = __dirname + '/../fixtures/bad4good.jpg';
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
       a1.insert(function(){
         done();
@@ -71,7 +73,7 @@ describe('Application', function(){
     it('should add a photo to the Application', function(done){
       var id = a1._id.toString();
       Application.findById(id, function(application){
-        var photo = __dirname + '/../fixtures/shaggs.gif';
+        var photo = __dirname + '/../fixtures/theband-copy2.png';
         application.addPhoto(photo, 'france.jpg');
         expect(application.photos).to.have.length(1);
         expect(application.photos[0]).to.equal('/img/testa/france.jpg');
@@ -79,13 +81,14 @@ describe('Application', function(){
       });
     });
   });
+
   describe('#insert', function(){
     it('should insert a new Application into Mongo', function(done){
       var o = {};
       o.name = 'Test band photos';
       o.taken = '2010-03-25';
       var a1 = new Application(o);
-      var oldname = __dirname + '/../fixtures/bad4good.jpg';
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
       a1.insert(function(err){
         expect(a1._id).to.be.instanceof(Mongo.ObjectID);
@@ -99,7 +102,7 @@ describe('Application', function(){
 
     beforeEach(function(done){
       a1 = new Application({name:'Test A', taken:'2012-03-25'});
-      var oldname = __dirname + '/../fixtures/bad4good.jpg';
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
       a1.insert(function(){
         done();
@@ -109,7 +112,7 @@ describe('Application', function(){
     it('should update an existing photo application', function(done){
       var id = a1._id.toString();
       Application.findById(id, function(application){
-        var photo = __dirname + '/../fixtures/shaggs.gif';
+        var photo = __dirname + '/../fixtures/theband-copy2.png';
         application.addPhoto(photo, 'france.jpg');
         expect(application.photos).to.have.length(1);
         expect(application.photos[0]).to.equal('/img/testa/france.jpg');
@@ -120,6 +123,7 @@ describe('Application', function(){
       });
     });
   });
+
   describe('Find Methods', function(){
     var a1, a2, a3;
 
