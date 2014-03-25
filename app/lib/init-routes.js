@@ -28,8 +28,7 @@ function load(app, fn){
   app.post('/applications', d, applications.create);
   app.get('/applications/new', d, applications.new);
   app.get('/applications/:id', d, applications.show);
-  app.post('/applications/:id', d, applications.photoAdd);
-
+  app.post('/applications/:id', d, applications.songAdd);
 
   console.log('Routes Loaded');
   fn();

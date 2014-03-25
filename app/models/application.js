@@ -2,7 +2,7 @@
 
 module.exports = Application;
 
-var applications = global.nss.db.collection('applications');
+var applications = global.nss.db.collection('bandPortal-test');
 var fs = require('fs');
 var path = require('path');
 var Mongo = require('mongodb');
@@ -13,10 +13,9 @@ function Application(application){
   this.name = application.name;
   this.links = [];
   this.youTubePath = application.youTubePath;
-  this.songs = application.songs;
   this.soundCloudPath = application.soundCloudPath;
   this.entryDate = new Date(application.entryDate);
-  this.photos = [];
+  this.songs = [];
 }
 
 Application.prototype.addCover = function(oldpath){
@@ -31,13 +30,15 @@ Application.prototype.addCover = function(oldpath){
 
   this.cover = relpath;
 };
-Application.prototype.addPhoto = function(oldpath, name){
+
+Application.prototype.addSong = function(oldpath, title){
   var dirname = this.name.replace(/\s/g, '').toLowerCase();
+  title = title.replace(/\s/g, '').toLowerCase();
   var abspath = __dirname + '/../static';
-  var relpath = '/img/' + dirname + '/' + name;
+  var relpath = '/audios/' + dirname + title;
   fs.renameSync(oldpath, abspath + relpath);
 
-  this.photos.push(relpath);
+  this.songs.push(relpath);
 };
 
 Application.prototype.insert = function(fn){

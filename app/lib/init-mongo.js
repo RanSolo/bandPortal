@@ -2,6 +2,7 @@
 
 var MongoClient = require('mongodb').MongoClient;
 var mongoUrl = 'mongodb://localhost/' + process.env.DBNAME;
+
 var initialized = false;
 
 exports.connect = function(req, res, next){

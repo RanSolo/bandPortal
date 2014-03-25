@@ -9,17 +9,15 @@ exports.new = function(req, res){
 
 exports.show = function(req, res){
   Application.findById(req.params._id, function(application){
-    console.log('0000000000000APPLICATION0', application);
     res.render('applications/show');
   });
 };
+
 exports.index = function(req, res){
   Application.findAll(function(applications){
     res.render('applications/index', {moment:moment, applications:applications, title: 'Band Applications'});
   });
 };
-
-
 
 exports.create = function(req, res){
   var application = new Application(req.body);
@@ -28,9 +26,12 @@ exports.create = function(req, res){
     res.redirect('/');
   });
 };
-exports.photoAdd = function(req, res){
+
+exports.songAdd = function(req, res){
   Application.findById(req.params.id, function(application){
-    application.addPhoto(req.files.photo.path, req.files.photo.name);
+    application.addSong(req.files.song.path, req.files.song.name);
+    console.log('lolololololooloolooloooolloololooxxooxoxoxox');
+    console.log('req.files.song.name', req.files.song.name);
     application.update(function(){
       res.redirect('/applications/' + req.params.id);
     });
