@@ -28,7 +28,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
-  store : new RedisStore({host: '192.168.1.134', port: 6379}),
+  store : new RedisStore({host: 'localhost', port: 6379}),
   secret: 'change-this-to-a-super-secret-message',
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
