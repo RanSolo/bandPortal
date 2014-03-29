@@ -49,12 +49,12 @@
 	top: 50%;
 	margin-top: -8px;
 }
-.ui-datepicker .ui-datepicker-title {
+.ui-datepicker .ui-datepicker-name {
 	margin: 0 2.3em;
 	line-height: 1.8em;
 	text-align: center;
 }
-.ui-datepicker .ui-datepicker-title select {
+.ui-datepicker .ui-datepicker-name select {
 	font-size: 1em;
 	margin: 1px 0;
 }

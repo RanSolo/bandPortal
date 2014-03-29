@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-scale",
-	"title": "jQuery UI Scale Effect",
+	"name": "jQuery UI Scale Effect",
 	"description": "Grows or shrinks an element and its content. Restores an elemnt to its original size.",
 	"keywords": [
 		"ui",

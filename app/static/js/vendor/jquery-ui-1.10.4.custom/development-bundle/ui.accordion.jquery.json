@@ -1,6 +1,6 @@
 {
 	"name": "ui.accordion",
-	"title": "jQuery UI Accordion",
+	"name": "jQuery UI Accordion",
 	"description": "Displays collapsible content panels for presenting information in a limited amount of space.",
 	"keywords": [
 		"ui",

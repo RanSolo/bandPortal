@@ -49,12 +49,12 @@ html .fc,
 	text-align: right;
 	}
 	
-.fc-header-title {
+.fc-header-name {
 	display: inline-block;
 	vertical-align: top;
 	}
 	
-.fc-header-title h2 {
+.fc-header-name h2 {
 	margin-top: 0;
 	white-space: nowrap;
 	}
@@ -289,7 +289,7 @@ a.fc-event,
 	}
 	
 .fc-event-time,
-.fc-event-title {
+.fc-event-name {
 	padding: 0 1px;
 	}
 	

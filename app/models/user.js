@@ -3,7 +3,9 @@
 module.exports = User;
 var bcrypt = require('bcrypt');
 var users = global.nss.db.collection('users');
-var email = require('../lib/email');
+//var email = require('../lib/email');
+var Mongo = require('mongodb');
+//var Application = require('../../app/models/user');
 
 /* ---------------------------------- *
  * User
@@ -18,10 +20,10 @@ var email = require('../lib/email');
 
 function User(user){
   this.userName = user.userName;
-  this.bandName = user.bandName;
   this.email = user.email;
   this.password = user.password;
   this.role = user.role;
+  this.applications = user.applications || [];
 }
 
 User.prototype.register = function(fn){
@@ -29,15 +31,15 @@ User.prototype.register = function(fn){
 
   hashPassword(self.password, function(hashedPwd){
     self.password = hashedPwd;
-    insert(self, function(err){
-      if(self._id){
+    insert(self, function(err, records){
+  /*    if(self._id){
         email.sendWelcome({to:self.email}, function(err, body){
-          console.log('OOOOOOOOOOOOOOO', self.email);
-          fn(err, body);
+          fn(body);
         });
       }else{
         fn();
-      }
+      }*/
+      fn(records);
     });
   });
 };
@@ -59,15 +61,14 @@ User.findByEmailAndPassword = function(email, password, fn){
   });
 };
 
-
 function insert(user, fn){
   users.findOne({email:user.email}, function(err, userFound){
     if(!userFound){
       users.insert(user, function(err, record){
-        fn(err);
+        fn(err, record);
       });
     }else{
-      fn();
+      fn(err);
     }
   });
 }
@@ -77,3 +78,10 @@ function hashPassword(password, fn){
     fn(hash);
   });
 }
+
+User.findById = function(Id, fn){
+  var _id = new Mongo.ObjectID(Id);
+  users.findOne({_id:_id}, function(err, record){
+    fn(record);
+  });
+};

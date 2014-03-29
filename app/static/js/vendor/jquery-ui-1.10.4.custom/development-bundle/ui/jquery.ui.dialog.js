@@ -57,7 +57,7 @@ $.widget( "ui.dialog", {
 			at: "center",
 			of: window,
 			collision: "fit",
-			// Ensure the titlebar is always visible
+			// Ensure the namebar is always visible
 			using: function( pos ) {
 				var topOffset = $( this ).css( pos ).offset().top;
 				if ( topOffset < 0 ) {
@@ -67,7 +67,7 @@ $.widget( "ui.dialog", {
 		},
 		resizable: true,
 		show: null,
-		title: null,
+		name: null,
 		width: 300,
 
 		// callbacks
@@ -95,18 +95,18 @@ $.widget( "ui.dialog", {
 			parent: this.element.parent(),
 			index: this.element.parent().children().index( this.element )
 		};
-		this.originalTitle = this.element.attr("title");
-		this.options.title = this.options.title || this.originalTitle;
+		this.originalname = this.element.attr("name");
+		this.options.name = this.options.name || this.originalname;
 
 		this._createWrapper();
 
 		this.element
 			.show()
-			.removeAttr("title")
+			.removeAttr("name")
 			.addClass("ui-dialog-content ui-widget-content")
 			.appendTo( this.uiDialog );
 
-		this._createTitlebar();
+		this._createnamebar();
 		this._createButtonPane();
 
 		if ( this.options.draggable && $.fn.draggable ) {
@@ -148,8 +148,8 @@ $.widget( "ui.dialog", {
 
 		this.uiDialog.stop( true, true ).remove();
 
-		if ( this.originalTitle ) {
-			this.element.attr( "title", this.originalTitle );
+		if ( this.originalname ) {
+			this.element.attr( "name", this.originalname );
 		}
 
 		next = originalPosition.parent.children().eq( originalPosition.index );
@@ -258,7 +258,7 @@ $.widget( "ui.dialog", {
 			hasFocus = this.uiDialogButtonPane.find(":tabbable");
 		}
 		if ( !hasFocus.length ) {
-			hasFocus = this.uiDialogTitlebarClose.filter(":tabbable");
+			hasFocus = this.uiDialognamebarClose.filter(":tabbable");
 		}
 		if ( !hasFocus.length ) {
 			hasFocus = this.uiDialog;
@@ -337,18 +337,18 @@ $.widget( "ui.dialog", {
 		}
 	},
 
-	_createTitlebar: function() {
-		var uiDialogTitle;
+	_createnamebar: function() {
+		var uiDialogname;
 
-		this.uiDialogTitlebar = $("<div>")
-			.addClass("ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix")
+		this.uiDialognamebar = $("<div>")
+			.addClass("ui-dialog-namebar ui-widget-header ui-corner-all ui-helper-clearfix")
 			.prependTo( this.uiDialog );
-		this._on( this.uiDialogTitlebar, {
+		this._on( this.uiDialognamebar, {
 			mousedown: function( event ) {
 				// Don't prevent click on close button (#8838)
 				// Focusing a dialog that is partially scrolled out of view
 				// causes the browser to scroll it into view, preventing the click event
-				if ( !$( event.target ).closest(".ui-dialog-titlebar-close") ) {
+				if ( !$( event.target ).closest(".ui-dialog-namebar-close") ) {
 					// Dialog isn't getting focus when dragging (#8063)
 					this.uiDialog.focus();
 				}
@@ -358,7 +358,7 @@ $.widget( "ui.dialog", {
 		// support: IE
 		// Use type="button" to prevent enter keypresses in textboxes from closing the
 		// dialog in IE (#9312)
-		this.uiDialogTitlebarClose = $( "<button type='button'></button>" )
+		this.uiDialognamebarClose = $( "<button type='button'></button>" )
 			.button({
 				label: this.options.closeText,
 				icons: {
@@ -366,31 +366,31 @@ $.widget( "ui.dialog", {
 				},
 				text: false
 			})
-			.addClass("ui-dialog-titlebar-close")
-			.appendTo( this.uiDialogTitlebar );
-		this._on( this.uiDialogTitlebarClose, {
+			.addClass("ui-dialog-namebar-close")
+			.appendTo( this.uiDialognamebar );
+		this._on( this.uiDialognamebarClose, {
 			click: function( event ) {
 				event.preventDefault();
 				this.close( event );
 			}
 		});
 
-		uiDialogTitle = $("<span>")
+		uiDialogname = $("<span>")
 			.uniqueId()
-			.addClass("ui-dialog-title")
-			.prependTo( this.uiDialogTitlebar );
-		this._title( uiDialogTitle );
+			.addClass("ui-dialog-name")
+			.prependTo( this.uiDialognamebar );
+		this._name( uiDialogname );
 
 		this.uiDialog.attr({
-			"aria-labelledby": uiDialogTitle.attr("id")
+			"aria-labelledby": uiDialogname.attr("id")
 		});
 	},
 
-	_title: function( title ) {
-		if ( !this.options.title ) {
-			title.html("&#160;");
+	_name: function( name ) {
+		if ( !this.options.name ) {
+			name.html("&#160;");
 		}
-		title.text( this.options.title );
+		name.text( this.options.name );
 	},
 
 	_createButtonPane: function() {
@@ -455,8 +455,8 @@ $.widget( "ui.dialog", {
 		}
 
 		this.uiDialog.draggable({
-			cancel: ".ui-dialog-content, .ui-dialog-titlebar-close",
-			handle: ".ui-dialog-titlebar",
+			cancel: ".ui-dialog-content, .ui-dialog-namebar-close",
+			handle: ".ui-dialog-namebar",
 			containment: "document",
 			start: function( event, ui ) {
 				$( this ).addClass("ui-dialog-dragging");
@@ -596,7 +596,7 @@ $.widget( "ui.dialog", {
 		}
 
 		if ( key === "closeText" ) {
-			this.uiDialogTitlebarClose.button({
+			this.uiDialognamebarClose.button({
 				// Ensure that we always pass a string
 				label: "" + value
 			});
@@ -635,8 +635,8 @@ $.widget( "ui.dialog", {
 			}
 		}
 
-		if ( key === "title" ) {
-			this._title( this.uiDialogTitlebar.find(".ui-dialog-title") );
+		if ( key === "name" ) {
+			this._name( this.uiDialognamebar.find(".ui-dialog-name") );
 		}
 	},
 

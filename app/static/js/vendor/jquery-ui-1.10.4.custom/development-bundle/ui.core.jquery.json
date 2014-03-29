@@ -1,6 +1,6 @@
 {
 	"name": "ui.core",
-	"title": "jQuery UI Core",
+	"name": "jQuery UI Core",
 	"description": "The core of jQuery UI, required for all interactions and widgets.",
 	"keywords": [
 		"ui",

@@ -1,6 +1,6 @@
 {
 	"name": "ui.mouse",
-	"title": "jQuery UI Mouse",
+	"name": "jQuery UI Mouse",
 	"description": "Abstracts mouse-based interactions to assist in creating certain widgets.",
 	"keywords": [
 		"ui",

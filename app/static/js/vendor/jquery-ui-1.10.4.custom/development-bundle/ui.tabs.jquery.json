@@ -1,6 +1,6 @@
 {
 	"name": "ui.tabs",
-	"title": "jQuery UI Tabs",
+	"name": "jQuery UI Tabs",
 	"description": "Transforms a set of container elements into a tab structure.",
 	"keywords": [
 		"ui",

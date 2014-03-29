@@ -65,7 +65,7 @@ $.widget( "ui.button", {
 		}
 
 		this._determineButtonType();
-		this.hasTitle = !!this.buttonElement.attr( "title" );
+		this.hasname = !!this.buttonElement.attr( "name" );
 
 		var that = this,
 			options = this.options,
@@ -242,8 +242,8 @@ $.widget( "ui.button", {
 			.removeAttr( "aria-pressed" )
 			.html( this.buttonElement.find(".ui-button-text").html() );
 
-		if ( !this.hasTitle ) {
-			this.buttonElement.removeAttr( "title" );
+		if ( !this.hasname ) {
+			this.buttonElement.removeAttr( "name" );
 		}
 	},
 
@@ -324,8 +324,8 @@ $.widget( "ui.button", {
 			if ( !this.options.text ) {
 				buttonClasses.push( multipleIcons ? "ui-button-icons-only" : "ui-button-icon-only" );
 
-				if ( !this.hasTitle ) {
-					buttonElement.attr( "title", $.trim( buttonText ) );
+				if ( !this.hasname ) {
+					buttonElement.attr( "name", $.trim( buttonText ) );
 				}
 			}
 		} else {

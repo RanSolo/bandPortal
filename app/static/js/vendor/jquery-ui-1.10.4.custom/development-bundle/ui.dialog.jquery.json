@@ -1,6 +1,6 @@
 {
 	"name": "ui.dialog",
-	"title": "jQuery UI Dialog",
+	"name": "jQuery UI Dialog",
 	"description": "Displays customizable dialog windows.",
 	"keywords": [
 		"ui",

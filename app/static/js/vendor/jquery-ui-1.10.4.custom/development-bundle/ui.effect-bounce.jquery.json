@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-bounce",
-	"title": "jQuery UI Bounce Effect",
+	"name": "jQuery UI Bounce Effect",
 	"description": "Bounces an element horizontally or vertically n times.",
 	"keywords": [
 		"ui",

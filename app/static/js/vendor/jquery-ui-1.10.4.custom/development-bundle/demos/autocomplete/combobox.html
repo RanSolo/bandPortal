@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery UI Autocomplete - Combobox</title>
+	<name>jQuery UI Autocomplete - Combobox</name>
 	<link rel="stylesheet" href="../../themes/base/jquery.ui.all.css">
 	<script src="../../jquery-1.10.2.js"></script>
 	<script src="../../ui/jquery.ui.core.js"></script>
@@ -53,7 +53,7 @@
 				this.input = $( "<input>" )
 					.appendTo( this.wrapper )
 					.val( value )
-					.attr( "title", "" )
+					.attr( "name", "" )
 					.addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
 					.autocomplete({
 						delay: 0,
@@ -82,7 +82,7 @@
 
 				$( "<a>" )
 					.attr( "tabIndex", -1 )
-					.attr( "title", "Show All Items" )
+					.attr( "name", "Show All Items" )
 					.tooltip()
 					.appendTo( this.wrapper )
 					.button({
@@ -148,11 +148,11 @@
 				// Remove invalid value
 				this.input
 					.val( "" )
-					.attr( "title", value + " didn't match any item" )
+					.attr( "name", value + " didn't match any item" )
 					.tooltip( "open" );
 				this.element.val( "" );
 				this._delay(function() {
-					this.input.tooltip( "close" ).attr( "title", "" );
+					this.input.tooltip( "close" ).attr( "name", "" );
 				}, 2500 );
 				this.input.data( "ui-autocomplete" ).term = "";
 			},

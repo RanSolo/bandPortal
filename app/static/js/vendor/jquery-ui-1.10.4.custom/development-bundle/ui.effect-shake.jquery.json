@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-shake",
-	"title": "jQuery UI Shake Effect",
+	"name": "jQuery UI Shake Effect",
 	"description": "Shakes an element horizontally or vertically n times.",
 	"keywords": [
 		"ui",

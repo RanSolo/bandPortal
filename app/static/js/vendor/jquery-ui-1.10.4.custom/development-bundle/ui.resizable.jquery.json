@@ -1,6 +1,6 @@
 {
 	"name": "ui.resizable",
-	"title": "jQuery UI Resizable",
+	"name": "jQuery UI Resizable",
 	"description": "Enables resize functionality for any element.",
 	"keywords": [
 		"ui",

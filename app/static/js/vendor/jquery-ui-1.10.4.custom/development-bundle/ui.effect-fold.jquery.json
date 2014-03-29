@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-fold",
-	"title": "jQuery UI Fold Effect",
+	"name": "jQuery UI Fold Effect",
 	"description": "Folds an element first horizontally and then vertically.",
 	"keywords": [
 		"ui",

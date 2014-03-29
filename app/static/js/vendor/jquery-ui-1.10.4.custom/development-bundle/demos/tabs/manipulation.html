@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery UI Tabs - Simple manipulation</title>
+	<name>jQuery UI Tabs - Simple manipulation</name>
 	<link rel="stylesheet" href="../../themes/base/jquery.ui.all.css">
 	<script src="../../jquery-1.10.2.js"></script>
 	<script src="../../ui/jquery.ui.position.js"></script>
@@ -22,7 +22,7 @@
 	</style>
 	<script>
 	$(function() {
-		var tabTitle = $( "#tab_title" ),
+		var tabname = $( "#tab_name" ),
 			tabContent = $( "#tab_content" ),
 			tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
 			tabCounter = 2;
@@ -56,7 +56,7 @@
 
 		// actual addTab function: adds new tab using the input from the form above
 		function addTab() {
-			var label = tabTitle.val() || "Tab " + tabCounter,
+			var label = tabname.val() || "Tab " + tabCounter,
 				id = "tabs-" + tabCounter,
 				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
 				tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
@@ -93,11 +93,11 @@
 </head>
 <body>
 
-<div id="dialog" title="Tab data">
+<div id="dialog" name="Tab data">
 	<form>
 		<fieldset class="ui-helper-reset">
-			<label for="tab_title">Title</label>
-			<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+			<label for="tab_name">name</label>
+			<input type="text" name="tab_name" id="tab_name" value="" class="ui-widget-content ui-corner-all" />
 			<label for="tab_content">Content</label>
 			<textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all"></textarea>
 		</fieldset>

@@ -6485,7 +6485,7 @@ $.widget( "ui.button", {
 		}
 
 		this._determineButtonType();
-		this.hasTitle = !!this.buttonElement.attr( "title" );
+		this.hasname = !!this.buttonElement.attr( "name" );
 
 		var that = this,
 			options = this.options,
@@ -6662,8 +6662,8 @@ $.widget( "ui.button", {
 			.removeAttr( "aria-pressed" )
 			.html( this.buttonElement.find(".ui-button-text").html() );
 
-		if ( !this.hasTitle ) {
-			this.buttonElement.removeAttr( "title" );
+		if ( !this.hasname ) {
+			this.buttonElement.removeAttr( "name" );
 		}
 	},
 
@@ -6744,8 +6744,8 @@ $.widget( "ui.button", {
 			if ( !this.options.text ) {
 				buttonClasses.push( multipleIcons ? "ui-button-icons-only" : "ui-button-icon-only" );
 
-				if ( !this.hasTitle ) {
-					buttonElement.attr( "title", $.trim( buttonText ) );
+				if ( !this.hasname ) {
+					buttonElement.attr( "name", $.trim( buttonText ) );
 				}
 			}
 		} else {
@@ -6892,7 +6892,7 @@ function Datepicker() {
 		duration: "fast", // Duration of display/closure
 		beforeShowDay: null, // Function that takes a date and returns an array with
 			// [0] = true if selectable, false if not, [1] = custom CSS class name(s) or "",
-			// [2] = cell title (optional), e.g. $.datepicker.noWeekends
+			// [2] = cell name (optional), e.g. $.datepicker.noWeekends
 		beforeShow: null, // Function that takes an input field and
 			// returns a set of custom settings for the date picker
 		onSelect: null, // Define a callback function when a date is selected
@@ -7014,10 +7014,10 @@ $.extend(Datepicker.prototype, {
 			buttonImage = this._get(inst, "buttonImage");
 			inst.trigger = $(this._get(inst, "buttonImageOnly") ?
 				$("<img/>").addClass(this._triggerClass).
-					attr({ src: buttonImage, alt: buttonText, title: buttonText }) :
+					attr({ src: buttonImage, alt: buttonText, name: buttonText }) :
 				$("<button type='button'></button>").addClass(this._triggerClass).
 					html(!buttonImage ? buttonText : $("<img/>").attr(
-					{ src:buttonImage, alt:buttonText, title:buttonText })));
+					{ src:buttonImage, alt:buttonText, name:buttonText })));
 			input[isRTL ? "before" : "after"](inst.trigger);
 			inst.trigger.click(function() {
 				if ($.datepicker._datepickerShowing && $.datepicker._lastInput === input[0]) {
@@ -8432,8 +8432,8 @@ $.extend(Datepicker.prototype, {
 
 		prev = (this._canAdjustMonth(inst, -1, drawYear, drawMonth) ?
 			"<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click'" +
-			" title='" + prevText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>" :
-			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='"+ prevText +"'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>"));
+			" name='" + prevText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>" :
+			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' name='"+ prevText +"'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>"));
 
 		nextText = this._get(inst, "nextText");
 		nextText = (!navigationAsDateFormat ? nextText : this.formatDate(nextText,
@@ -8442,8 +8442,8 @@ $.extend(Datepicker.prototype, {
 
 		next = (this._canAdjustMonth(inst, +1, drawYear, drawMonth) ?
 			"<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click'" +
-			" title='" + nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>" :
-			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='"+ nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>"));
+			" name='" + nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>" :
+			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' name='"+ nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>"));
 
 		currentText = this._get(inst, "currentText");
 		gotoDate = (this._get(inst, "gotoCurrent") && inst.currentDay ? currentDate : today);
@@ -8502,7 +8502,7 @@ $.extend(Datepicker.prototype, {
 				for (dow = 0; dow < 7; dow++) { // days of the week
 					day = (dow + firstDay) % 7;
 					thead += "<th" + ((dow + firstDay + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + ">" +
-						"<span title='" + dayNames[day] + "'>" + dayNamesMin[day] + "</span></th>";
+						"<span name='" + dayNames[day] + "'>" + dayNamesMin[day] + "</span></th>";
 				}
 				calender += thead + "</tr></thead><tbody>";
 				daysInMonth = this._getDaysInMonth(drawYear, drawMonth);
@@ -8535,7 +8535,7 @@ $.extend(Datepicker.prototype, {
 							(otherMonth && !showOtherMonths ? "" : " " + daySettings[1] + // highlight custom dates
 							(printDate.getTime() === currentDate.getTime() ? " " + this._currentClass : "") + // highlight selected day
 							(printDate.getTime() === today.getTime() ? " ui-datepicker-today" : "")) + "'" + // highlight today (if different)
-							((!otherMonth || showOtherMonths) && daySettings[2] ? " title='" + daySettings[2].replace(/'/g, "&#39;") + "'" : "") + // cell title
+							((!otherMonth || showOtherMonths) && daySettings[2] ? " name='" + daySettings[2].replace(/'/g, "&#39;") + "'" : "") + // cell name
 							(unselectable ? "" : " data-handler='selectDay' data-event='click' data-month='" + printDate.getMonth() + "' data-year='" + printDate.getFullYear() + "'") + ">" + // actions
 							(otherMonth && !showOtherMonths ? "&#xa0;" : // display for other months
 							(unselectable ? "<span class='ui-state-default'>" + printDate.getDate() + "</span>" : "<a class='ui-state-default" +
@@ -8572,7 +8572,7 @@ $.extend(Datepicker.prototype, {
 			changeMonth = this._get(inst, "changeMonth"),
 			changeYear = this._get(inst, "changeYear"),
 			showMonthAfterYear = this._get(inst, "showMonthAfterYear"),
-			html = "<div class='ui-datepicker-title'>",
+			html = "<div class='ui-datepicker-name'>",
 			monthHtml = "";
 
 		// month selection
@@ -8878,7 +8878,7 @@ $.widget( "ui.dialog", {
 			at: "center",
 			of: window,
 			collision: "fit",
-			// Ensure the titlebar is always visible
+			// Ensure the namebar is always visible
 			using: function( pos ) {
 				var topOffset = $( this ).css( pos ).offset().top;
 				if ( topOffset < 0 ) {
@@ -8888,7 +8888,7 @@ $.widget( "ui.dialog", {
 		},
 		resizable: true,
 		show: null,
-		title: null,
+		name: null,
 		width: 300,
 
 		// callbacks
@@ -8916,18 +8916,18 @@ $.widget( "ui.dialog", {
 			parent: this.element.parent(),
 			index: this.element.parent().children().index( this.element )
 		};
-		this.originalTitle = this.element.attr("title");
-		this.options.title = this.options.title || this.originalTitle;
+		this.originalname = this.element.attr("name");
+		this.options.name = this.options.name || this.originalname;
 
 		this._createWrapper();
 
 		this.element
 			.show()
-			.removeAttr("title")
+			.removeAttr("name")
 			.addClass("ui-dialog-content ui-widget-content")
 			.appendTo( this.uiDialog );
 
-		this._createTitlebar();
+		this._createnamebar();
 		this._createButtonPane();
 
 		if ( this.options.draggable && $.fn.draggable ) {
@@ -8969,8 +8969,8 @@ $.widget( "ui.dialog", {
 
 		this.uiDialog.stop( true, true ).remove();
 
-		if ( this.originalTitle ) {
-			this.element.attr( "title", this.originalTitle );
+		if ( this.originalname ) {
+			this.element.attr( "name", this.originalname );
 		}
 
 		next = originalPosition.parent.children().eq( originalPosition.index );
@@ -9079,7 +9079,7 @@ $.widget( "ui.dialog", {
 			hasFocus = this.uiDialogButtonPane.find(":tabbable");
 		}
 		if ( !hasFocus.length ) {
-			hasFocus = this.uiDialogTitlebarClose.filter(":tabbable");
+			hasFocus = this.uiDialognamebarClose.filter(":tabbable");
 		}
 		if ( !hasFocus.length ) {
 			hasFocus = this.uiDialog;
@@ -9158,18 +9158,18 @@ $.widget( "ui.dialog", {
 		}
 	},
 
-	_createTitlebar: function() {
-		var uiDialogTitle;
+	_createnamebar: function() {
+		var uiDialogname;
 
-		this.uiDialogTitlebar = $("<div>")
-			.addClass("ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix")
+		this.uiDialognamebar = $("<div>")
+			.addClass("ui-dialog-namebar ui-widget-header ui-corner-all ui-helper-clearfix")
 			.prependTo( this.uiDialog );
-		this._on( this.uiDialogTitlebar, {
+		this._on( this.uiDialognamebar, {
 			mousedown: function( event ) {
 				// Don't prevent click on close button (#8838)
 				// Focusing a dialog that is partially scrolled out of view
 				// causes the browser to scroll it into view, preventing the click event
-				if ( !$( event.target ).closest(".ui-dialog-titlebar-close") ) {
+				if ( !$( event.target ).closest(".ui-dialog-namebar-close") ) {
 					// Dialog isn't getting focus when dragging (#8063)
 					this.uiDialog.focus();
 				}
@@ -9179,7 +9179,7 @@ $.widget( "ui.dialog", {
 		// support: IE
 		// Use type="button" to prevent enter keypresses in textboxes from closing the
 		// dialog in IE (#9312)
-		this.uiDialogTitlebarClose = $( "<button type='button'></button>" )
+		this.uiDialognamebarClose = $( "<button type='button'></button>" )
 			.button({
 				label: this.options.closeText,
 				icons: {
@@ -9187,31 +9187,31 @@ $.widget( "ui.dialog", {
 				},
 				text: false
 			})
-			.addClass("ui-dialog-titlebar-close")
-			.appendTo( this.uiDialogTitlebar );
-		this._on( this.uiDialogTitlebarClose, {
+			.addClass("ui-dialog-namebar-close")
+			.appendTo( this.uiDialognamebar );
+		this._on( this.uiDialognamebarClose, {
 			click: function( event ) {
 				event.preventDefault();
 				this.close( event );
 			}
 		});
 
-		uiDialogTitle = $("<span>")
+		uiDialogname = $("<span>")
 			.uniqueId()
-			.addClass("ui-dialog-title")
-			.prependTo( this.uiDialogTitlebar );
-		this._title( uiDialogTitle );
+			.addClass("ui-dialog-name")
+			.prependTo( this.uiDialognamebar );
+		this._name( uiDialogname );
 
 		this.uiDialog.attr({
-			"aria-labelledby": uiDialogTitle.attr("id")
+			"aria-labelledby": uiDialogname.attr("id")
 		});
 	},
 
-	_title: function( title ) {
-		if ( !this.options.title ) {
-			title.html("&#160;");
+	_name: function( name ) {
+		if ( !this.options.name ) {
+			name.html("&#160;");
 		}
-		title.text( this.options.title );
+		name.text( this.options.name );
 	},
 
 	_createButtonPane: function() {
@@ -9276,8 +9276,8 @@ $.widget( "ui.dialog", {
 		}
 
 		this.uiDialog.draggable({
-			cancel: ".ui-dialog-content, .ui-dialog-titlebar-close",
-			handle: ".ui-dialog-titlebar",
+			cancel: ".ui-dialog-content, .ui-dialog-namebar-close",
+			handle: ".ui-dialog-namebar",
 			containment: "document",
 			start: function( event, ui ) {
 				$( this ).addClass("ui-dialog-dragging");
@@ -9417,7 +9417,7 @@ $.widget( "ui.dialog", {
 		}
 
 		if ( key === "closeText" ) {
-			this.uiDialogTitlebarClose.button({
+			this.uiDialognamebarClose.button({
 				// Ensure that we always pass a string
 				label: "" + value
 			});
@@ -9456,8 +9456,8 @@ $.widget( "ui.dialog", {
 			}
 		}
 
-		if ( key === "title" ) {
-			this._title( this.uiDialogTitlebar.find(".ui-dialog-title") );
+		if ( key === "name" ) {
+			this._name( this.uiDialognamebar.find(".ui-dialog-name") );
 		}
 	},
 
@@ -12398,13 +12398,13 @@ $.widget( "ui.tooltip", {
 		content: function() {
 			// support: IE<9, Opera in jQuery <1.7
 			// .text() can't accept undefined, so coerce to a string
-			var title = $( this ).attr( "title" ) || "";
-			// Escape title, since we're going from an attribute to raw HTML
-			return $( "<a>" ).text( title ).html();
+			var name = $( this ).attr( "name" ) || "";
+			// Escape name, since we're going from an attribute to raw HTML
+			return $( "<a>" ).text( name ).html();
 		},
 		hide: true,
 		// Disabled elements have inconsistent behavior across browsers (#8661)
-		items: "[title]:not([disabled])",
+		items: "[name]:not([disabled])",
 		position: {
 			my: "left top+15",
 			at: "left bottom",
@@ -12427,7 +12427,7 @@ $.widget( "ui.tooltip", {
 
 		// IDs of generated tooltips, needed for destroy
 		this.tooltips = {};
-		// IDs of parent tooltips where we removed the title attribute
+		// IDs of parent tooltips where we removed the name attribute
 		this.parents = {};
 
 		if ( this.options.disabled ) {
@@ -12464,23 +12464,23 @@ $.widget( "ui.tooltip", {
 			that.close( event, true );
 		});
 
-		// remove title attributes to prevent native tooltips
+		// remove name attributes to prevent native tooltips
 		this.element.find( this.options.items ).addBack().each(function() {
 			var element = $( this );
-			if ( element.is( "[title]" ) ) {
+			if ( element.is( "[name]" ) ) {
 				element
-					.data( "ui-tooltip-title", element.attr( "title" ) )
-					.attr( "title", "" );
+					.data( "ui-tooltip-name", element.attr( "name" ) )
+					.attr( "name", "" );
 			}
 		});
 	},
 
 	_enable: function() {
-		// restore title attributes
+		// restore name attributes
 		this.element.find( this.options.items ).addBack().each(function() {
 			var element = $( this );
-			if ( element.data( "ui-tooltip-title" ) ) {
-				element.attr( "title", element.data( "ui-tooltip-title" ) );
+			if ( element.data( "ui-tooltip-name" ) ) {
+				element.attr( "name", element.data( "ui-tooltip-name" ) );
 			}
 		});
 	},
@@ -12497,8 +12497,8 @@ $.widget( "ui.tooltip", {
 			return;
 		}
 
-		if ( target.attr( "title" ) ) {
-			target.data( "ui-tooltip-title", target.attr( "title" ) );
+		if ( target.attr( "name" ) ) {
+			target.data( "ui-tooltip-name", target.attr( "name" ) );
 		}
 
 		target.data( "ui-tooltip-open", true );
@@ -12513,13 +12513,13 @@ $.widget( "ui.tooltip", {
 					blurEvent.target = blurEvent.currentTarget = this;
 					that.close( blurEvent, true );
 				}
-				if ( parent.attr( "title" ) ) {
+				if ( parent.attr( "name" ) ) {
 					parent.uniqueId();
 					that.parents[ this.id ] = {
 						element: this,
-						title: parent.attr( "title" )
+						name: parent.attr( "name" )
 					};
-					parent.attr( "title", "" );
+					parent.attr( "name", "" );
 				}
 			});
 		}
@@ -12577,18 +12577,18 @@ $.widget( "ui.tooltip", {
 			return;
 		}
 
-		// if we have a title, clear it to prevent the native tooltip
-		// we have to check first to avoid defining a title if none exists
-		// (we don't want to cause an element to start matching [title])
+		// if we have a name, clear it to prevent the native tooltip
+		// we have to check first to avoid defining a name if none exists
+		// (we don't want to cause an element to start matching [name])
 		//
 		// We use removeAttr only for key events, to allow IE to export the correct
 		// accessible attributes. For mouse events, set to empty string to avoid
 		// native tooltip showing up (happens only when removing inside mouseover).
-		if ( target.is( "[title]" ) ) {
+		if ( target.is( "[name]" ) ) {
 			if ( event && event.type === "mouseover" ) {
-				target.attr( "title", "" );
+				target.attr( "name", "" );
 			} else {
-				target.removeAttr( "title" );
+				target.removeAttr( "name" );
 			}
 		}
 
@@ -12667,9 +12667,9 @@ $.widget( "ui.tooltip", {
 		// Clear the interval for delayed tracking tooltips
 		clearInterval( this.delayedShow );
 
-		// only set title if we had one before (see comment in _open())
-		if ( target.data( "ui-tooltip-title" ) ) {
-			target.attr( "title", target.data( "ui-tooltip-title" ) );
+		// only set name if we had one before (see comment in _open())
+		if ( target.data( "ui-tooltip-name" ) ) {
+			target.attr( "name", target.data( "ui-tooltip-name" ) );
 		}
 
 		removeDescribedBy( target );
@@ -12689,7 +12689,7 @@ $.widget( "ui.tooltip", {
 
 		if ( event && event.type === "mouseleave" ) {
 			$.each( this.parents, function( id, parent ) {
-				$( parent.element ).attr( "title", parent.title );
+				$( parent.element ).attr( "name", parent.name );
 				delete that.parents[ id ];
 			});
 		}
@@ -12740,10 +12740,10 @@ $.widget( "ui.tooltip", {
 			// hide animation
 			$( "#" + id ).remove();
 
-			// Restore the title
-			if ( element.data( "ui-tooltip-title" ) ) {
-				element.attr( "title", element.data( "ui-tooltip-title" ) );
-				element.removeData( "ui-tooltip-title" );
+			// Restore the name
+			if ( element.data( "ui-tooltip-name" ) ) {
+				element.attr( "name", element.data( "ui-tooltip-name" ) );
+				element.removeData( "ui-tooltip-name" );
 			}
 		});
 	}

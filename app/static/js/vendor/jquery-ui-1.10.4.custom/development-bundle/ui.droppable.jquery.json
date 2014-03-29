@@ -1,6 +1,6 @@
 {
 	"name": "ui.droppable",
-	"title": "jQuery UI Droppable",
+	"name": "jQuery UI Droppable",
 	"description": "Enables drop targets for draggable elements.",
 	"keywords": [
 		"ui",

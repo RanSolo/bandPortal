@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-fade",
-	"title": "jQuery UI Fade Effect",
+	"name": "jQuery UI Fade Effect",
 	"description": "Fades an element.",
 	"keywords": [
 		"ui",

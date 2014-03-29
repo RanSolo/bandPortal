@@ -21,7 +21,7 @@ version 1.6.3 (8/10/13)
 	- fixed bug with agenda event dropping in wrong column (PR 55)
 	- easier event element z-index customization (PR 58)
 	- classNames on past/future days (PR 88)
-	- allow null/undefined event titles (PR 84)
+	- allow null/undefined event names (PR 84)
 	- small optimize for agenda event rendering (PR 56)
 	- deprecated:
 		- viewDisplay
@@ -46,7 +46,7 @@ version 1.6.0 (3/18/13)
 	- week numbers on side of calendar (issue 295)
 		- weekNumber
 		- weekNumberCalculation
-		- weekNumberTitle
+		- weekNumbername
 		- "W" formatting variable
 	- finer snapping granularity for agenda view events (issue 495, thx ms-doodle-com)
 	- eventAfterAllRender (issue 753, thx pdrakeweb)
@@ -162,7 +162,7 @@ version 1.4.7 (7/5/10)
 		- bug rendering events that have an endtime with seconds, but no hours/minutes (issue 477)
 		- gotoDate date overflow bug (issue 429)
 		- wrong date reported when clicking on edge of last column in agenda views (412)
-	- support newlines in event titles
+	- support newlines in event names
 	- select/unselect callbacks now passes native js event
 
 version 1.4.6 (5/31/10)
@@ -289,7 +289,7 @@ version 1.3 (9/21/09)
 		x draggable           -> editable/disableDragging
 		x fixedWeeks          -> weekMode
 		x abbrevDayHeadings   -> columnFormat
-		x buttons/title       -> header
+		x buttons/name       -> header
 		x eventDragOpacity    -> dragOpacity
 		x eventRevertDuration -> dragRevertDuration
 		x weekStart           -> firstDay
@@ -361,7 +361,7 @@ version 1.1 (5/10/09)
 	- Added the following options:
 		- weekStart
 		- rightToLeft
-		- titleFormat
+		- nameFormat
 		- timeFormat
 		- cacheParam
 		- resize

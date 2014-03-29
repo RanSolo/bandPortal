@@ -2,56 +2,71 @@
 
 module.exports = Application;
 
-var applications = global.nss.db.collection('bandPortal-test');
+var applications = global.nss.db.collection('apps');
+//var email = require('../lib/email');
 var fs = require('fs');
 var path = require('path');
 var Mongo = require('mongodb');
 var _ = require('lodash');
+//var User = require('../models/user');
 
 function Application(application){
-  this._id = application._id;
-  this.name = application.name;
-  this.links = [];
+  this.bandName = application.bandName;
+  this.photos = application.photos || [];
+  this.bio = application.bio;
+  this.website = application.website;
+  this.facebook = application.facebook;
   this.youTubePath = application.youTubePath;
   this.soundCloudPath = application.soundCloudPath;
-  this.entryDate = new Date(application.entryDate);
-  this.songs = [];
+  this.sonicbids = application.sonicbids;
+  this.date = new Date(application.date);
+  this.venue = application.venue;
+  this.city = application.city;
+  this.userId = application.userId ? new Mongo.ObjectID(application.userId.toString()) : application.userId;
+  this.venueId = application.venueId ? new Mongo.ObjectID(application.venueId.toString()) : application.venueId;
 }
 
-Application.prototype.addCover = function(oldpath){
-  var dirname = this.name.replace(/\s/g, '').toLowerCase();
+Application.prototype.addCover = function(oldname){
+  var dirname = this.bandName.replace(/\s/g, '').toLowerCase();
   var abspath = __dirname + '/../static';
   var relpath = '/img/' + dirname;
   fs.mkdirSync(abspath + relpath);
 
-  var extension = path.extname(oldpath);
+  var extension = path.extname(oldname);
   relpath += '/cover' + extension;
-  fs.renameSync(oldpath, abspath + relpath);
+  fs.renameSync(oldname, abspath + relpath);
 
   this.cover = relpath;
 };
 
-Application.prototype.addSong = function(oldpath, title){
-  var dirname = this.name.replace(/\s/g, '').toLowerCase();
-  title = title.replace(/\s/g, '').toLowerCase();
+Application.prototype.addPhoto = function(oldpath, name){
+  var dirname = this.bandName.replace(/\s/g, '').toLowerCase();
   var abspath = __dirname + '/../static';
-  var relpath = '/audios/' + dirname + title;
+  var relpath = '/img/'+ dirname+ '/' +name;
   fs.renameSync(oldpath, abspath + relpath);
 
-  this.songs.push(relpath);
+  this.photos.push(relpath);
 };
 
 Application.prototype.insert = function(fn){
-  applications.insert(this, function(err, records){
-    fn(err);
+  var self = this;
+  applications.insert(self, function(err, records){
+    fn(err, records);
+  });
+};
+
+Application.destroy = function(_id, fn){
+  applications.remove({_id:_id}, function(err, count){
+    fn(count);
   });
 };
 
 Application.prototype.update = function(fn){
-  applications.update({_id:this._id}, this, function(err, count){
+  applications.update({_id: this._id}, this, function(err, count){
     fn(err, count);
   });
 };
+
 
 Application.findAll = function(fn){
   applications.find().toArray(function(err, records){
@@ -66,3 +81,46 @@ Application.findById = function(id, fn){
     fn(_.extend(record, Application.prototype));
   });
 };
+
+Application.findByDate = function(date, fn){
+  applications.find({date:date}).toArray(function(err, applications){
+    fn(applications);
+  });
+};
+
+Application.findByUserId = function(userId, fn){
+  applications.find({userId:userId}).toArray(function(err, records){
+    fn(records);
+  });
+};
+
+Application.findByVenueId = function(userId, fn){
+
+
+};
+
+/*
+Application.findByVenueId = function(id, fn){});
+
+*/
+/*
+Application.prototype.addPhoto = function(oldpath, name){
+  var dirname = this.name.replace(/\s/g, '').toLowerCase();
+  name = name.replace(/\s/g, '').toLowerCase();
+  var abspath = __dirname + '/../static';
+  var relpath = '/img/' + dirname +'/'+ name;
+  fs.renameSync(oldpath, abspath + relpath);
+
+  this.photos.push(relpath);
+};
+
+Application.prototype.addSong = function(oldpath, name){
+  var dirname = this.name.replace(/\s/g, '').toLowerCase();
+  name = name.replace(/\s/g, '').toLowerCase();
+  var abspath = __dirname + '/../static';
+  var relpath = '/audios/' + dirname + name;
+  fs.renameSync(oldpath, abspath + relpath);
+
+  this.songs.push(relpath);
+};
+*/

@@ -1,6 +1,6 @@
 {
 	"name": "ui.widget",
-	"title": "jQuery UI Widget",
+	"name": "jQuery UI Widget",
 	"description": "Provides a factory for creating stateful widgets with a common API.",
 	"keywords": [
 		"ui",

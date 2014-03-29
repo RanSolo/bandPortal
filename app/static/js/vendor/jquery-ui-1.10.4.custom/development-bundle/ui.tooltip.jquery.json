@@ -1,6 +1,6 @@
 {
 	"name": "ui.tooltip",
-	"title": "jQuery UI Tooltip",
+	"name": "jQuery UI Tooltip",
 	"description": "Shows additional information for any element on hover or focus.",
 	"keywords": [
 		"ui",

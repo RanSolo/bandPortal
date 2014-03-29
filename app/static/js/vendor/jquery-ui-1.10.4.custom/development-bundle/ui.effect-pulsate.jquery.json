@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-pulsate",
-	"title": "jQuery UI Pulsate Effect",
+	"name": "jQuery UI Pulsate Effect",
 	"description": "Pulsates an element n times by changing the opacity to zero and back.",
 	"keywords": [
 		"ui",

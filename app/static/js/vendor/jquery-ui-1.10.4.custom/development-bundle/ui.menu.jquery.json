@@ -1,6 +1,6 @@
 {
 	"name": "ui.menu",
-	"title": "jQuery UI Menu",
+	"name": "jQuery UI Menu",
 	"description": "Creates nestable menus.",
 	"keywords": [
 		"ui",

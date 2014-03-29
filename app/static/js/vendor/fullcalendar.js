@@ -21,14 +21,14 @@ var defaults = {
 	defaultView: 'month',
 	aspectRatio: 1.35,
 	header: {
-		left: 'title',
+		left: 'name',
 		center: '',
 		right: 'today prev,next'
 	},
 	weekends: true,
 	weekNumbers: false,
 	weekNumberCalculation: 'iso',
-	weekNumberTitle: 'W',
+	weekNumbername: 'W',
 	
 	// editing
 	//editable: false,
@@ -44,7 +44,7 @@ var defaults = {
 	endParam: 'end',
 	
 	// time formats
-	titleFormat: {
+	nameFormat: {
 		month: 'MMMM yyyy',
 		week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}",
 		day: 'dddd, MMM d, yyyy'
@@ -97,7 +97,7 @@ var rtlDefaults = {
 	header: {
 		left: 'next,prev today',
 		center: '',
-		right: 'title'
+		right: 'name'
 	},
 	buttonText: {
 		prev: "<span class='fc-text-arrow'>&rsaquo;</span>",
@@ -394,7 +394,7 @@ function Calendar(element, options, eventSources) {
 		unfreezeContentHeight();
 		(currentView.afterRender || noop)();
 
-		updateTitle();
+		updatename();
 		updateTodayButton();
 
 		trigger('viewRender', currentView, currentView, currentView.element);
@@ -543,8 +543,8 @@ function Calendar(element, options, eventSources) {
 	-----------------------------------------------------------------------------*/
 
 
-	function updateTitle() {
-		header.updateTitle(currentView.title);
+	function updatename() {
+		header.updatename(currentView.name);
 	}
 
 
@@ -729,7 +729,7 @@ function Header(calendar, options) {
 	// exports
 	t.render = render;
 	t.destroy = destroy;
-	t.updateTitle = updateTitle;
+	t.updatename = updatename;
 	t.activateButton = activateButton;
 	t.deactivateButton = deactivateButton;
 	t.disableButton = disableButton;
@@ -773,8 +773,8 @@ function Header(calendar, options) {
 				}
 				var prevButton;
 				$.each(this.split(','), function(j, buttonName) {
-					if (buttonName == 'title') {
-						e.append("<span class='fc-header-title'><h2>&nbsp;</h2></span>");
+					if (buttonName == 'name') {
+						e.append("<span class='fc-header-name'><h2>&nbsp;</h2></span>");
 						if (prevButton) {
 							prevButton.addClass(tm + '-corner-right');
 						}
@@ -848,7 +848,7 @@ function Header(calendar, options) {
 	}
 	
 	
-	function updateTitle(html) {
+	function updatename(html) {
 		element.find('h2')
 			.html(html);
 	}
@@ -1137,7 +1137,7 @@ function EventManager(options, _sources) {
 				}else{
 					e.end = null;
 				}
-				e.title = event.title;
+				e.name = event.name;
 				e.url = event.url;
 				e.allDay = event.allDay;
 				e.className = event.className;
@@ -1992,7 +1992,7 @@ function MonthView(element, calendar) {
 			rowCnt = 6;
 		}
 
-		t.title = formatDate(start, opt('titleFormat'));
+		t.name = formatDate(start, opt('nameFormat'));
 
 		t.start = start;
 		t.end = end;
@@ -2048,10 +2048,10 @@ function BasicWeekView(element, calendar) {
 		t.visStart = visStart;
 		t.visEnd = visEnd;
 
-		t.title = formatDates(
+		t.name = formatDates(
 			visStart,
 			addDays(cloneDate(visEnd), -1),
-			opt('titleFormat')
+			opt('nameFormat')
 		);
 
 		renderBasic(1, colCnt, false);
@@ -2091,7 +2091,7 @@ function BasicDayView(element, calendar) {
 		var start = cloneDate(date, true);
 		var end = addDays(cloneDate(start), 1);
 
-		t.title = formatDate(date, opt('titleFormat'));
+		t.name = formatDate(date, opt('nameFormat'));
 
 		t.start = t.visStart = start;
 		t.end = t.visEnd = end;
@@ -2182,7 +2182,7 @@ function BasicView(element, calendar, viewName) {
 	var tm;
 	var colFormat;
 	var showWeekNumbers;
-	var weekNumberTitle;
+	var weekNumbername;
 	var weekNumberFormat;
 	
 	
@@ -2214,7 +2214,7 @@ function BasicView(element, calendar, viewName) {
 
 		// week # options. (TODO: bad, logic also in other views)
 		showWeekNumbers = opt('weekNumbers');
-		weekNumberTitle = opt('weekNumberTitle');
+		weekNumbername = opt('weekNumbername');
 		if (opt('weekNumberCalculation') != 'iso') {
 			weekNumberFormat = "w";
 		}
@@ -2293,7 +2293,7 @@ function BasicView(element, calendar, viewName) {
 		if (showWeekNumbers) {
 			html +=
 				"<th class='fc-week-number " + headerClass + "'>" +
-				htmlEscape(weekNumberTitle) +
+				htmlEscape(weekNumbername) +
 				"</th>";
 		}
 
@@ -2691,10 +2691,10 @@ function AgendaWeekView(element, calendar) {
 
 		var colCnt = getCellsPerWeek();
 
-		t.title = formatDates(
+		t.name = formatDates(
 			visStart,
 			addDays(cloneDate(visEnd), -1),
-			opt('titleFormat')
+			opt('nameFormat')
 		);
 
 		t.start = start;
@@ -2738,7 +2738,7 @@ function AgendaDayView(element, calendar) {
 		var start = cloneDate(date, true);
 		var end = addDays(cloneDate(start), 1);
 
-		t.title = formatDate(date, opt('titleFormat'));
+		t.name = formatDate(date, opt('nameFormat'));
 
 		t.start = t.visStart = start;
 		t.end = t.visEnd = end;
@@ -2876,7 +2876,7 @@ function AgendaView(element, calendar, viewName) {
 	var minMinute, maxMinute;
 	var colFormat;
 	var showWeekNumbers;
-	var weekNumberTitle;
+	var weekNumbername;
 	var weekNumberFormat;
 	
 
@@ -2911,7 +2911,7 @@ function AgendaView(element, calendar, viewName) {
 
 		// week # options. (TODO: bad, logic also in other views)
 		showWeekNumbers = opt('weekNumbers');
-		weekNumberTitle = opt('weekNumberTitle');
+		weekNumbername = opt('weekNumbername');
 		if (opt('weekNumberCalculation') != 'iso') {
 			weekNumberFormat = "w";
 		}
@@ -3075,10 +3075,10 @@ function AgendaView(element, calendar, viewName) {
 			date = cellToDate(0, 0);
 			weekText = formatDate(date, weekNumberFormat);
 			if (rtl) {
-				weekText += weekNumberTitle;
+				weekText += weekNumbername;
 			}
 			else {
-				weekText = weekNumberTitle + weekText;
+				weekText = weekNumbername + weekText;
 			}
 			html +=
 				"<th class='fc-agenda-axis fc-week-number " + headerClass + "'>" +
@@ -3542,7 +3542,7 @@ function AgendaView(element, calendar, viewName) {
 						rect.isEnd = true;   //
 						selectionHelper = $(slotSegHtml(
 							{
-								title: '',
+								name: '',
 								start: startDate,
 								end: endDate,
 								className: ['fc-select-helper'],
@@ -3833,7 +3833,7 @@ function AgendaEventRenderer() {
 			eventElements,
 			eventElement,
 			triggerRes,
-			titleElement,
+			nameElement,
 			height,
 			slotSegmentContainer = getSlotSegmentContainer(),
 			isRTL = opt('isRTL');
@@ -3920,15 +3920,15 @@ function AgendaEventRenderer() {
 		
 		lazySegBind(slotSegmentContainer, segs, bindSlotSeg);
 		
-		// record event sides and title positions
+		// record event sides and name positions
 		for (i=0; i<segCnt; i++) {
 			seg = segs[i];
 			if (eventElement = seg.element) {
 				seg.vsides = vsides(eventElement, true);
 				seg.hsides = hsides(eventElement, true);
-				titleElement = eventElement.find('.fc-event-title');
-				if (titleElement.length) {
-					seg.contentTop = titleElement[0].offsetTop;
+				nameElement = eventElement.find('.fc-event-name');
+				if (nameElement.length) {
+					seg.contentTop = nameElement[0].offsetTop;
 				}
 			}
 		}
@@ -3942,10 +3942,10 @@ function AgendaEventRenderer() {
 				eventElement[0].style.height = height + 'px';
 				event = seg.event;
 				if (seg.contentTop !== undefined && height - seg.contentTop < 10) {
-					// not enough room for title, put it in the time (TODO: maybe make both display:inline instead)
+					// not enough room for name, put it in the time (TODO: maybe make both display:inline instead)
 					eventElement.find('div.fc-event-time')
-						.text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.title);
-					eventElement.find('div.fc-event-title')
+						.text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.name);
+					eventElement.find('div.fc-event-name')
 						.remove();
 				}
 				trigger('eventAfterRender', event, event, eventElement);
@@ -3992,8 +3992,8 @@ function AgendaEventRenderer() {
 			"<div class='fc-event-time'>" +
 			htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 			"</div>" +
-			"<div class='fc-event-title'>" +
-			htmlEscape(event.title || '') +
+			"<div class='fc-event-name'>" +
+			htmlEscape(event.name || '') +
 			"</div>" +
 			"</div>" +
 			"<div class='fc-event-bg'></div>";
@@ -4318,7 +4318,7 @@ function AgendaEventRenderer() {
 					eventResize(this, event, 0, snapMinutes*snapDelta, ev, ui);
 				}else{
 					showEvents(event, eventElement);
-					// BUG: if event was really short, need to put title back in span
+					// BUG: if event was really short, need to put name back in span
 				}
 			}
 		});
@@ -4530,7 +4530,7 @@ function compareForwardSlotSegs(seg1, seg2) {
 function compareSlotSegs(seg1, seg2) {
 	return seg1.start - seg2.start || // earlier start time goes first
 		(seg2.end - seg2.start) - (seg1.end - seg1.start) || // tie? longer-duration goes first
-		(seg1.event.title || '').localeCompare(seg2.event.title); // tie? alphabetically by title
+		(seg1.event.name || '').localeCompare(seg2.event.name); // tie? alphabetically by name
 }
 
 
@@ -4559,7 +4559,7 @@ function View(element, calendar, viewName) {
 	t.hideEvents = hideEvents;
 	t.eventDrop = eventDrop;
 	t.eventResize = eventResize;
-	// t.title
+	// t.name
 	// t.start, t.end
 	// t.visStart, t.visEnd
 	
@@ -5360,8 +5360,8 @@ function DayEventRenderer() {
 				"</span>";
 		}
 		html +=
-			"<span class='fc-event-title'>" +
-			htmlEscape(event.title || '') +
+			"<span class='fc-event-name'>" +
+			htmlEscape(event.name || '') +
 			"</span>" +
 			"</div>";
 		if (segment.isEnd && isEventResizable(event)) {
@@ -5825,7 +5825,7 @@ function compareDaySegments(a, b) {
 	return (b.rightCol - b.leftCol) - (a.rightCol - a.leftCol) || // put wider events first
 		b.event.allDay - a.event.allDay || // if tie, put all-day events first (booleans cast to 0/1)
 		a.event.start - b.event.start || // if a tie, sort by event start date
-		(a.event.title || '').localeCompare(b.event.title) // if a tie, sort by event title
+		(a.event.name || '').localeCompare(b.event.name) // if a tie, sort by event name
 }
 
 

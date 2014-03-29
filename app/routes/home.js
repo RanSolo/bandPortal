@@ -1,13 +1,13 @@
 'use strict';
 
 exports.index = function(req, res){
-  res.render('home/index', {title: 'myPod bandPortal'});
+  res.render('home/index', {name: 'myPod bandPortal'});
 };
 
 exports.calendar = function(req, res){
-  res.render('home/calendar', {title: 'bandPortal calendar'});
+  res.render('home/calendar', {name: 'bandPortal calendar'});
 };
 
 exports.applications = function(req, res){
-  res.render('applications/index', {title: 'bandPortal Application'});
+  res.render('applications/index', {name: 'bandPortal Application'});
 };

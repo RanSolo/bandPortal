@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-explode",
-	"title": "jQuery UI Explode Effect",
+	"name": "jQuery UI Explode Effect",
 	"description": "Explodes an element in all directions into n pieces. Implodes an element to its original wholeness.",
 	"keywords": [
 		"ui",

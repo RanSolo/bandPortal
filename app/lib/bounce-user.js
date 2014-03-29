@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 module.exports = function(req, res, next){
   var path = url.parse(req.url).pathname;
-  var urls = ['/', '/fresh', '/login', '/logout']; //reminder: this is a whitelist, not a blacklist
+  var urls = ['/', '/register', '/login', '/logout']; //reminder: this is a whitelist, not a blacklist
 
   if(_.contains(urls, path)){
     next();

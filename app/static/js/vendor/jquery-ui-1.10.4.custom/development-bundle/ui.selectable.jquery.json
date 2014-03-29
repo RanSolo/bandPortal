@@ -1,6 +1,6 @@
 {
 	"name": "ui.selectable",
-	"title": "jQuery UI Selectable",
+	"name": "jQuery UI Selectable",
 	"description": "Allows groups of elements to be selected with the mouse.",
 	"keywords": [
 		"ui",

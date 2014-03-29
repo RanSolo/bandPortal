@@ -23,12 +23,13 @@ function load(app, fn){
   app.post('/register', d, users.create);
   app.get('/login', d, users.login);
   app.post('/login', d, users.authenticate);
-//  app.post('/logout', d, users.logout);
-  app.get('/applications', d,  applications.index);
-  app.post('/applications', d, applications.create);
+  app.get('/users/:id', d, users.show);
+//  app.get('/applications', d,  applications.index);
   app.get('/applications/new', d, applications.new);
   app.get('/applications/:id', d, applications.show);
-  app.post('/applications/:id', d, applications.songAdd);
+  app.post('/applications', d, applications.create);
+  app.post('/applications/:id', d, applications.photoAdd);
+  app.post('/logout', d, users.logout);
 
   console.log('Routes Loaded');
   fn();

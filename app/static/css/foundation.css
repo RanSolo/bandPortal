@@ -980,7 +980,7 @@ meta.foundation-mq-topbar {
     height: auto;
     width: 100%;
     max-height: 100%; }
-    .fixed.expanded:not(.top-bar) .title-area {
+    .fixed.expanded:not(.top-bar) .name-area {
       position: fixed;
       width: 100%;
       z-index: 99; }
@@ -1013,7 +1013,7 @@ meta.foundation-mq-topbar {
     padding-bottom: .35rem;
     margin-bottom: 0;
     font-size: 0.75rem; }
-  .top-bar .title-area {
+  .top-bar .name-area {
     position: relative;
     margin: 0; }
   .top-bar .name {
@@ -1069,7 +1069,7 @@ meta.foundation-mq-topbar {
   .top-bar.expanded {
     height: auto;
     background: transparent; }
-    .top-bar.expanded .title-area {
+    .top-bar.expanded .name-area {
       background: #333333; }
     .top-bar.expanded .toggle-topbar a {
       color: #888888; }
@@ -1185,9 +1185,9 @@ meta.foundation-mq-topbar {
         padding: 8px 15px; }
         .top-bar-section .dropdown li a.parent-link {
           font-weight: normal; }
-      .top-bar-section .dropdown li.title h5 {
+      .top-bar-section .dropdown li.name h5 {
         margin-bottom: 0; }
-        .top-bar-section .dropdown li.title h5 a {
+        .top-bar-section .dropdown li.name h5 a {
           color: white;
           line-height: 22.5px;
           display: block; }
@@ -1218,7 +1218,7 @@ meta.foundation-mq-topbar {
       clear: both; }
     .top-bar .toggle-topbar {
       display: none; }
-    .top-bar .title-area {
+    .top-bar .name-area {
       float: left; }
     .top-bar .name h1 a {
       width: auto; }
@@ -2029,7 +2029,7 @@ div.switch {
   .pricing-table * {
     list-style: none;
     line-height: 1; }
-  .pricing-table .title {
+  .pricing-table .name {
     background-color: #333333;
     padding: 0.9375rem 1.25rem;
     text-align: center;
@@ -3104,8 +3104,8 @@ blockquote p {
   a[href]:after {
     content: " (" attr(href) ")"; }
 
-  abbr[title]:after {
-    content: " (" attr(title) ")"; }
+  abbr[name]:after {
+    content: " (" attr(name) ")"; }
 
   .ir a:after,
   a[href^="javascript:"]:after,

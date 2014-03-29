@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect",
-	"title": "jQuery UI Effects Core",
+	"name": "jQuery UI Effects Core",
 	"description": "Extends the internal jQuery effects. Includes morphing and easing. Required by all other effects.",
 	"keywords": [
 		"ui",

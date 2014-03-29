@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-highlight",
-	"title": "jQuery UI Highlight Effect",
+	"name": "jQuery UI Highlight Effect",
 	"description": "Highlights the background of an element in a defined color for a custom duration.",
 	"keywords": [
 		"ui",

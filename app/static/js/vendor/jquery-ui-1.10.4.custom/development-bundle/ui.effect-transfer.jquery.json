@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-transfer",
-	"title": "jQuery UI Transfer Effect",
+	"name": "jQuery UI Transfer Effect",
 	"description": "Displays a transfer effect from one element to another.",
 	"keywords": [
 		"ui",

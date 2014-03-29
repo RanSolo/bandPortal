@@ -48,13 +48,13 @@ $.widget( "ui.tooltip", {
 		content: function() {
 			// support: IE<9, Opera in jQuery <1.7
 			// .text() can't accept undefined, so coerce to a string
-			var title = $( this ).attr( "title" ) || "";
-			// Escape title, since we're going from an attribute to raw HTML
-			return $( "<a>" ).text( title ).html();
+			var name = $( this ).attr( "name" ) || "";
+			// Escape name, since we're going from an attribute to raw HTML
+			return $( "<a>" ).text( name ).html();
 		},
 		hide: true,
 		// Disabled elements have inconsistent behavior across browsers (#8661)
-		items: "[title]:not([disabled])",
+		items: "[name]:not([disabled])",
 		position: {
 			my: "left top+15",
 			at: "left bottom",
@@ -77,7 +77,7 @@ $.widget( "ui.tooltip", {
 
 		// IDs of generated tooltips, needed for destroy
 		this.tooltips = {};
-		// IDs of parent tooltips where we removed the title attribute
+		// IDs of parent tooltips where we removed the name attribute
 		this.parents = {};
 
 		if ( this.options.disabled ) {
@@ -114,23 +114,23 @@ $.widget( "ui.tooltip", {
 			that.close( event, true );
 		});
 
-		// remove title attributes to prevent native tooltips
+		// remove name attributes to prevent native tooltips
 		this.element.find( this.options.items ).addBack().each(function() {
 			var element = $( this );
-			if ( element.is( "[title]" ) ) {
+			if ( element.is( "[name]" ) ) {
 				element
-					.data( "ui-tooltip-title", element.attr( "title" ) )
-					.attr( "title", "" );
+					.data( "ui-tooltip-name", element.attr( "name" ) )
+					.attr( "name", "" );
 			}
 		});
 	},
 
 	_enable: function() {
-		// restore title attributes
+		// restore name attributes
 		this.element.find( this.options.items ).addBack().each(function() {
 			var element = $( this );
-			if ( element.data( "ui-tooltip-title" ) ) {
-				element.attr( "title", element.data( "ui-tooltip-title" ) );
+			if ( element.data( "ui-tooltip-name" ) ) {
+				element.attr( "name", element.data( "ui-tooltip-name" ) );
 			}
 		});
 	},
@@ -147,8 +147,8 @@ $.widget( "ui.tooltip", {
 			return;
 		}
 
-		if ( target.attr( "title" ) ) {
-			target.data( "ui-tooltip-title", target.attr( "title" ) );
+		if ( target.attr( "name" ) ) {
+			target.data( "ui-tooltip-name", target.attr( "name" ) );
 		}
 
 		target.data( "ui-tooltip-open", true );
@@ -163,13 +163,13 @@ $.widget( "ui.tooltip", {
 					blurEvent.target = blurEvent.currentTarget = this;
 					that.close( blurEvent, true );
 				}
-				if ( parent.attr( "title" ) ) {
+				if ( parent.attr( "name" ) ) {
 					parent.uniqueId();
 					that.parents[ this.id ] = {
 						element: this,
-						title: parent.attr( "title" )
+						name: parent.attr( "name" )
 					};
-					parent.attr( "title", "" );
+					parent.attr( "name", "" );
 				}
 			});
 		}
@@ -227,18 +227,18 @@ $.widget( "ui.tooltip", {
 			return;
 		}
 
-		// if we have a title, clear it to prevent the native tooltip
-		// we have to check first to avoid defining a title if none exists
-		// (we don't want to cause an element to start matching [title])
+		// if we have a name, clear it to prevent the native tooltip
+		// we have to check first to avoid defining a name if none exists
+		// (we don't want to cause an element to start matching [name])
 		//
 		// We use removeAttr only for key events, to allow IE to export the correct
 		// accessible attributes. For mouse events, set to empty string to avoid
 		// native tooltip showing up (happens only when removing inside mouseover).
-		if ( target.is( "[title]" ) ) {
+		if ( target.is( "[name]" ) ) {
 			if ( event && event.type === "mouseover" ) {
-				target.attr( "title", "" );
+				target.attr( "name", "" );
 			} else {
-				target.removeAttr( "title" );
+				target.removeAttr( "name" );
 			}
 		}
 
@@ -317,9 +317,9 @@ $.widget( "ui.tooltip", {
 		// Clear the interval for delayed tracking tooltips
 		clearInterval( this.delayedShow );
 
-		// only set title if we had one before (see comment in _open())
-		if ( target.data( "ui-tooltip-title" ) ) {
-			target.attr( "title", target.data( "ui-tooltip-title" ) );
+		// only set name if we had one before (see comment in _open())
+		if ( target.data( "ui-tooltip-name" ) ) {
+			target.attr( "name", target.data( "ui-tooltip-name" ) );
 		}
 
 		removeDescribedBy( target );
@@ -339,7 +339,7 @@ $.widget( "ui.tooltip", {
 
 		if ( event && event.type === "mouseleave" ) {
 			$.each( this.parents, function( id, parent ) {
-				$( parent.element ).attr( "title", parent.title );
+				$( parent.element ).attr( "name", parent.name );
 				delete that.parents[ id ];
 			});
 		}
@@ -390,10 +390,10 @@ $.widget( "ui.tooltip", {
 			// hide animation
 			$( "#" + id ).remove();
 
-			// Restore the title
-			if ( element.data( "ui-tooltip-title" ) ) {
-				element.attr( "title", element.data( "ui-tooltip-title" ) );
-				element.removeData( "ui-tooltip-title" );
+			// Restore the name
+			if ( element.data( "ui-tooltip-name" ) ) {
+				element.attr( "name", element.data( "ui-tooltip-name" ) );
+				element.removeData( "ui-tooltip-name" );
 			}
 		});
 	}

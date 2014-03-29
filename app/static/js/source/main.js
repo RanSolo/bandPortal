@@ -21,7 +21,7 @@
   //////event handlers
 ///////start recording ///////
 ///////hides start shows stop
-///////calls SC.record and updates timer  
+///////calls SC.record and updates timer
     $('#submitApplication').click(youTubeIt, fileUpload);
 
     $('#startRecording a').click(function(e){
@@ -60,7 +60,7 @@
     ////////upload///////
     ///////calls SC.connect for auth/////
     ///////updates status calls SC.recordUpload()
-    //////passes title and sharing 
+    //////passes name and sharing
 
     $('#upload a').click(function(e){
       alert('HEY');
@@ -71,7 +71,7 @@
           $('.status').html('Uploading...');
           SC.recordUpload({
             track:{
-              title: 'My recording',
+              name: 'My recording',
               sharing: 'private'
             }
           }, function(track){
@@ -95,82 +95,10 @@
     //
     $('#cal').datepicker();
 
-    $('#mySliderDiv').slider({
-      orientation: 'horizontal',
-      min: 0,
-      max: 150,
-      value:11
-    });
-
-    $( '#beginning' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-seek-start'
-      }
-    });
-    $( '#rewind' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-seek-prev'
-      }
-    });
-    $( '#play' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-play'
-      }
-    })
-    .click(function() {
-      var options;
-      if ( $( this ).text() === 'play' ) {
-        options = {
-          label: 'pause',
-          icons: {
-            primary: 'ui-icon-pause'
-          }
-        };
-      } else {
-        options = {
-          label: 'play',
-          icons: {
-            primary: 'ui-icon-play'
-          }
-        };
-      }
-      $( this ).button( 'option', options );
-    });
-    $( '#stop' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-stop'
-      }
-    })
-    .click(function() {
-      $( '#play' ).button( 'option', {
-        label: 'play',
-        icons: {
-          primary: 'ui-icon-play'
-        }
-      });
-    });
-    $( '#forward' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-seek-next'
-      }
-    });
-    $( '#end' ).button({
-      text: false,
-      icons: {
-        primary: 'ui-icon-seek-end'
-      }
-    });
-    $( '#shuffle' ).button();
-    $( '#repeat' ).buttonset();
     $('#calendar').fullCalendar({
       editable: true,
       events:[
-        {title: 'All Day Event',
+        {name: 'All Day Event',
         start: new Date(y, m, d + 3)
     }
       ]
@@ -182,7 +110,7 @@
 
 
 
-    SC.get('/tracks/293', function(track){
+    SC.get('/tracks/313104', function(track){
       SC.oEmbed(track.permalink_url, document.getElementById('player'));
       console.log(track.permalink_url);
     });
@@ -190,10 +118,10 @@
     SC.get('/tracks', { genres:'ambient' }, function(tracks) {
 
       $(tracks).each(function(index, track) {
-        $('#results').append($('<li></li>').html(track.title + ' - ' + track.genre));
+        $('#results').append($('<li></li>').html(track.name + ' - ' + track.genre));
       });
     });
-    
+
     SC.stream('/tracks/293', function(sound){
       $('#start').click(function(e){
         e.preventDefault();
@@ -212,15 +140,16 @@
             window.setTimeout(function() {
               SC.recordStop();
               SC.recordUpload({
-                track: { title: 'This is my sound' }
+                track: { name: 'This is my sound' }
               });
             }, 5000);
           }
         });
       });
     }
-    
     /*
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&color=ff5500"></iframe>
+
     SC.record({
       start: function(){
                window.setTimeout(function(){

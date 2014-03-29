@@ -1,6 +1,6 @@
 {
 	"name": "ui.progressbar",
-	"title": "jQuery UI Progressbar",
+	"name": "jQuery UI Progressbar",
 	"description": "Displays a status indicator for loading state, standard percentage, and other progress indicators.",
 	"keywords": [
 		"ui",

@@ -1,6 +1,6 @@
 {
 	"name": "ui.datepicker",
-	"title": "jQuery UI Datepicker",
+	"name": "jQuery UI Datepicker",
 	"description": "Displays a calendar from an input or inline for selecting dates.",
 	"keywords": [
 		"ui",

@@ -337,12 +337,12 @@ button.ui-button::-moz-focus-inner {
 	top: 50%;
 	margin-top: -8px;
 }
-.ui-datepicker .ui-datepicker-title {
+.ui-datepicker .ui-datepicker-name {
 	margin: 0 2.3em;
 	line-height: 1.8em;
 	text-align: center;
 }
-.ui-datepicker .ui-datepicker-title select {
+.ui-datepicker .ui-datepicker-name select {
 	font-size: 1em;
 	margin: 1px 0;
 }
@@ -469,11 +469,11 @@ button.ui-button::-moz-focus-inner {
 	padding: .2em;
 	outline: 0;
 }
-.ui-dialog .ui-dialog-titlebar {
+.ui-dialog .ui-dialog-namebar {
 	padding: .4em 1em;
 	position: relative;
 }
-.ui-dialog .ui-dialog-title {
+.ui-dialog .ui-dialog-name {
 	float: left;
 	margin: .1em 0;
 	white-space: nowrap;
@@ -481,7 +481,7 @@ button.ui-button::-moz-focus-inner {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.ui-dialog .ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-namebar-close {
 	position: absolute;
 	right: .3em;
 	top: 50%;
@@ -518,7 +518,7 @@ button.ui-button::-moz-focus-inner {
 	bottom: -5px;
 	background-position: 16px 16px;
 }
-.ui-draggable .ui-dialog-titlebar {
+.ui-draggable .ui-dialog-namebar {
 	cursor: move;
 }
 .ui-menu {

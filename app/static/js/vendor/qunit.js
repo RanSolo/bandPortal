@@ -236,8 +236,8 @@ config = {
 	// very useful in combination with "Hide passed tests" checked
 	reorder: true,
 
-	// by default, modify document.title when suite is done
-	altertitle: true,
+	// by default, modify document.name when suite is done
+	altername: true,
 
 	// by default, scroll to top of the page when suite is done
 	scrolltop: true,
@@ -343,7 +343,7 @@ extend( QUnit, {
 
 		if ( qunit ) {
 			qunit.innerHTML =
-				"<h1 id='qunit-header'>" + escapeText( document.title ) + "</h1>" +
+				"<h1 id='qunit-header'>" + escapeText( document.name ) + "</h1>" +
 				"<h2 id='qunit-banner'></h2>" +
 				"<div id='qunit-testrunner-toolbar'></div>" +
 				"<h2 id='qunit-userAgent'></h2>" +
@@ -605,16 +605,16 @@ QUnit.load = function() {
 				"' type='checkbox'" +
 				( val.value ? " value='" + escapeText( val.value ) + "'" : "" ) +
 				( config[ val.id ] ? " checked='checked'" : "" ) +
-				" title='" + escapeText( val.tooltip ) +
+				" name='" + escapeText( val.tooltip ) +
 				"'><label for='qunit-urlconfig-" + escapeText( val.id ) +
-				"' title='" + escapeText( val.tooltip ) + "'>" + val.label + "</label>";
+				"' name='" + escapeText( val.tooltip ) + "'>" + val.label + "</label>";
 		} else {
 			urlConfigHtml += "<label for='qunit-urlconfig-" + escapeText( val.id ) +
-				"' title='" + escapeText( val.tooltip ) +
+				"' name='" + escapeText( val.tooltip ) +
 				"'>" + val.label +
 				": </label><select id='qunit-urlconfig-" + escapeText( val.id ) +
 				"' name='" + escapeText( val.id ) +
-				"' title='" + escapeText( val.tooltip ) +
+				"' name='" + escapeText( val.tooltip ) +
 				"'><option></option>";
 			selection = false;
 			if ( QUnit.is( "array", val.value ) ) {
@@ -716,7 +716,7 @@ QUnit.load = function() {
 		// `label` initialized at top of scope
 		label = document.createElement( "label" );
 		label.setAttribute( "for", "qunit-filter-pass" );
-		label.setAttribute( "title", "Only show tests and assertions that fail. Stored in sessionStorage." );
+		label.setAttribute( "name", "Only show tests and assertions that fail. Stored in sessionStorage." );
 		label.innerHTML = "Hide passed tests";
 		toolbar.appendChild( label );
 
@@ -848,12 +848,12 @@ function done() {
 		id( "qunit-testresult" ).innerHTML = html;
 	}
 
-	if ( config.altertitle && defined.document && document.title ) {
-		// show ✖ for good, ✔ for bad suite result in title
+	if ( config.altername && defined.document && document.name ) {
+		// show ✖ for good, ✔ for bad suite result in name
 		// use escape sequences in case file gets loaded with non-utf-8-charset
-		document.title = [
+		document.name = [
 			( config.stats.bad ? "\u2716" : "\u2714" ),
-			document.title.replace( /^[\u2714\u2716] /i, "" )
+			document.name.replace( /^[\u2714\u2716] /i, "" )
 		].join( " " );
 	}
 

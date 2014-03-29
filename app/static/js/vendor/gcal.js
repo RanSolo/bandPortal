@@ -76,7 +76,7 @@ function transformOptions(sourceOptions, start, end) {
 					}
 					events.push({
 						id: entry['gCal$uid']['value'],
-						title: entry['title']['$t'],
+						name: entry['name']['$t'],
 						url: url,
 						start: start,
 						end: end,

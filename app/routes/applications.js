@@ -4,7 +4,7 @@ var Application = require('../models/application');
 var moment = require('moment');
 
 exports.new = function(req, res){
-  res.render('applications/new', {title: 'New Application'});
+  res.render('applications/new', {name: 'New Application'});
 };
 
 exports.show = function(req, res){
@@ -15,25 +15,24 @@ exports.show = function(req, res){
 
 exports.index = function(req, res){
   Application.findAll(function(applications){
-    res.render('applications/index', {moment:moment, applications:applications, title: 'Band Applications'});
+    res.render('applications/index', {moment:moment, applications:applications, name: 'Band Applications'});
   });
 };
 
 exports.create = function(req, res){
   var application = new Application(req.body);
+  console.log('APPLICATION', application);
   application.addCover(req.files.cover.path);
   application.insert(function(){
-    res.redirect('/');
+    res.redirect('/application/show');
   });
 };
 
-exports.songAdd = function(req, res){
-  Application.findById(req.params.id, function(application){
-    application.addSong(req.files.song.path, req.files.song.name);
-    console.log('lolololololooloolooloooolloololooxxooxoxoxox');
-    console.log('req.files.song.name', req.files.song.name);
+exports.photoAdd = function(req, res){
+  Application.findById(req.params._id, function(application){
+    application.addPhoto(req.files.photo.path, req.files.photo.name);
     application.update(function(){
-      res.redirect('/applications/' + req.params.id);
+      res.redirect('/applications' + req.params.id);
     });
   });
 };

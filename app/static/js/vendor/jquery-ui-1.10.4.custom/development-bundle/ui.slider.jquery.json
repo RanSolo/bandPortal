@@ -1,6 +1,6 @@
 {
 	"name": "ui.slider",
-	"title": "jQuery UI Slider",
+	"name": "jQuery UI Slider",
 	"description": "Displays a flexible slider with ranges and accessibility via keyboard.",
 	"keywords": [
 		"ui",

@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-slide",
-	"title": "jQuery UI Slide Effect",
+	"name": "jQuery UI Slide Effect",
 	"description": "Slides an element in and out of the viewport.",
 	"keywords": [
 		"ui",

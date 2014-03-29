@@ -1,6 +1,6 @@
 {
 	"name": "ui.sortable",
-	"title": "jQuery UI Sortable",
+	"name": "jQuery UI Sortable",
 	"description": "Enables items in a list to be sorted using the mouse.",
 	"keywords": [
 		"ui",

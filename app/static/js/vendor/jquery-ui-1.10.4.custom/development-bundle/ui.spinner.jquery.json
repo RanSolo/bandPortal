@@ -1,6 +1,6 @@
 {
 	"name": "ui.spinner",
-	"title": "jQuery UI Spinner",
+	"name": "jQuery UI Spinner",
 	"description": "Displays buttons to easily input numbers via the keyboard or mouse.",
 	"keywords": [
 		"ui",

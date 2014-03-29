@@ -1,7 +1,7 @@
 extends ../shared/template
 
 block content
-  h1= bandPortal 
+  h1= bandPortal
   .row
     .small-3.columns
       form
@@ -11,28 +11,25 @@ block content
     .small-6.columns
   .row
     .small-2.columns
-      a#start(href='#') Start  
+      a#start(href='#') Start
   .row
     .small-2.columns
       a#stop(href='#') Stop
   .row
     .small-8.columns
-      ul
-        li#startRecording: a(href='#') Start Recording
-        li#stopRecording: a(href='#') Stop recording
-        li#playback: a(href='#') Playback
-        li#upload: a(href='#') Upload
-        li: p.status
+      //- ul
+      //-   li#startRecording: a(href='#') Start Recording
+      //-   li#stopRecording: a(href='#') Stop recording
+      //-   li#playback: a(href='#') Playback
+      //-   li#upload: a(href='#') Upload
+      //-   li: p.status
 
   #player
   #youTube
-
-  <iframe width="420" height="315" src="//www.youtube.com/watch?v=7aMb8iAEWvQ" frameborder="0" allowfullscreen></iframe>
+  <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&color=ff5500"></iframe>
+  <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
 
   ul#results
 
-
   form
     fieldset
-
-

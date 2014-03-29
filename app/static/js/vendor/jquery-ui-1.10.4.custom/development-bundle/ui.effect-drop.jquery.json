@@ -1,6 +1,6 @@
 {
 	"name": "ui.effect-drop",
-	"title": "jQuery UI Drop Effect",
+	"name": "jQuery UI Drop Effect",
 	"description": "Moves an element in one direction and hides it at the same time.",
 	"keywords": [
 		"ui",
