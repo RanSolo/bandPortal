@@ -9,6 +9,7 @@ var User;
 var bob, u1, u2;
 
 describe('User', function(){
+  this.timeout(10000);
 
   before(function(done){
     var initMongo = require('../../app/lib/init-mongo');

@@ -2,9 +2,10 @@
 
 module.exports = User;
 var bcrypt = require('bcrypt');
+var Mongo = require('mongodb');
 var users = global.nss.db.collection('users');
 //var email = require('../lib/email');
-var Mongo = require('mongodb');
+
 //var Application = require('../../app/models/user');
 
 /* ---------------------------------- *
