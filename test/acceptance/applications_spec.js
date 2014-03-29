@@ -5,6 +5,7 @@ var app = require('../../app/app');
 var request = require('supertest');
 var fs = require('fs');
 var exec = require('child_process').exec;
+//var expect = require('chai');
 var User, Application;
 var bob;
 var cookie;
@@ -112,6 +113,25 @@ describe('users', function(){
       .expect(302, done);
     });
   });
+
+  describe('PUT /aplications/:Id', function(){
+    var a1;
+
+    it('should update an application', function(done){
+      a1 = new Application({bandName:'Test A', entryDate:'2012-03-25'});
+      a1.insert(function(){
+        a1.bandName = 'Test the band'; //userId:'121212121212121212121212', date:'2012-03-25'};
+        var id = a1._id.toString();
+        request(app)
+        .put('/applications/' + id)
+        .send(a1)
+        .set('cookie', cookie)
+        //.end(function(err, res){
+        .expect(302, done);
+      });
+    });
+  });
+
 /*
   describe('POST /applications/songs/:id', function(){
     var a1;

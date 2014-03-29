@@ -12,7 +12,8 @@ var _ = require('lodash');
 
 function Application(application){
   this.bandName = application.bandName;
-  this.photos = application.photos || [];
+  //this.photos = application.photos || [];
+  //this.cover = application.cover || ('');
   this.bio = application.bio || ('');
   this.website = application.website || ('');
   this.facebook = application.facebook || ('');
@@ -24,15 +25,27 @@ function Application(application){
 }
 
 Application.prototype.addCover = function(oldname){
+  var self = this;
   var dirname = this.bandName.replace(/\s/g, '').toLowerCase();
   var abspath = __dirname + '/../static';
-  var relpath = '/img/' + dirname;
-  fs.mkdirSync(abspath + relpath);
+  var relpath = '/img/' + dirname + '/';
+  fs.mkdir(abspath + relpath, function(){
+    var base = path.basename(oldname);
+    relpath += base;
+    fs.rename(oldname, abspath + relpath, function(){
+      self.cover = relpath;
+    });
+  });
+};
+/*
+Application.prototype.addCover = function(oldname){
+  var filename = this.bandName.replace(/\s/g, '').toLowerCase();
+  var abspath = __dirname + '/../static';
+  var relpath = '/img/covers/' + filename;
 
   var extension = path.extname(oldname);
-  relpath += '/cover' + extension;
+  relpath += extension;
   fs.renameSync(oldname, abspath + relpath);
-
   this.cover = relpath;
 };
 
@@ -44,11 +57,11 @@ Application.prototype.addPhoto = function(oldpath, name){
 
   this.photos.push(relpath);
 };
-
+*/
 Application.prototype.insert = function(fn){
   var self = this;
   applications.insert(self, function(err, records){
-    fn(err, records);
+    fn(records);
   });
 };
 
@@ -60,11 +73,11 @@ Application.destroy = function(id, fn){
 };
 
 Application.prototype.update = function(fn){
-  applications.update({_id: this._id}, this, function(err, count){
-    fn(err, count);
+  console.log('FNFNFNFNFNFNFNFNFNFNFNFNFNFNFN', fn);
+  applications.update({_id:this._id}, this, function(err, count){
+    fn(count);
   });
 };
-
 
 Application.findAll = function(fn){
   applications.find().toArray(function(err, records){

@@ -13,6 +13,13 @@ exports.show = function(req, res){
   });
 };
 
+exports.update = function(req, res){
+  var app = new Application(req.body);
+  app.update(function(){
+    res.redirect('/applications/' + req.params.id);
+  });
+};
+
 exports.index = function(req, res){
   Application.findAll(function(applications){
     res.render('applications/index', {moment:moment, applications:applications, name: 'Band Applications'});

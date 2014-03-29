@@ -29,7 +29,7 @@ describe('Application', function(){
       var copy2file = __dirname + '/../fixtures/theband-copy2.png';
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
-      global.nss.db.dropDatabase(function(err, result){
+      global.nss.db.dropDatabase(function(){
         done();
       });
     });
@@ -48,42 +48,30 @@ describe('Application', function(){
       expect(a1.date).to.be.instanceof(Date);
     });
   });
-
-  describe('#addCover', function(){
-    it('should add a cover to the Application', function(){
-      var o = {};
-      o.bandName = 'test the Band';
-      o.date = '2010-03-25';
-      var a1 = new Application(o);
-      var oldname = __dirname + '/../fixtures/theband-copy1.png';
-      a1.addCover(oldname);
-      expect(a1.cover).to.equal('/img/testtheband/cover.png');
-    });
-  });
-
-  describe('#addPhoto', function(){
-    var a1;
-
-    beforeEach(function(done){
-      a1 = new Application({bandName:'Test A', date:'2012-03-25'});
-      var oldname = __dirname + '/../fixtures/theband-copy1.png';
-      a1.addCover(oldname);
-      a1.insert(function(){
-        done();
-      });
-    });
-
-    it('should add a photo to the Application', function(done){
-      var id = a1._id.toString();
-      Application.findById(id, function(application){
-        var photo = __dirname + '/../fixtures/theband-copy2.png';
-        application.addPhoto(photo, 'france.jpg');
-        expect(application.photos).to.have.length(1);
-        expect(application.photos[0]).to.equal('/img/testa/france.jpg');
-        done();
-      });
-    });
-  });
+  //
+  // describe('#addPhoto', function(){
+  //   var a1;
+  //
+  //   beforeEach(function(done){
+  //     a1 = new Application({bandName:'Test A', date:'2012-03-25'});
+  //     var oldname = __dirname + '/../fixtures/theband-copy1.png';
+  //     a1.addCover(oldname);
+  //     a1.insert(function(){
+  //       done();
+  //     });
+  //   });
+  //
+  //   it('should add a photo to the Application', function(done){
+  //     var id = a1._id.toString();
+  //     Application.findById(id, function(application){
+  //       var photo = __dirname + '/../fixtures/theband-copy2.png';
+  //       application.addPhoto(photo, 'france.jpg');
+  //       expect(application.photos).to.have.length(1);
+  //       expect(application.photos[0]).to.equal('/img/testa/france.jpg');
+  //       done();
+  //     });
+  //   });
+  // });
 
   describe('#insert', function(){
     it('should insert a new Application into Mongo', function(done){
@@ -105,7 +93,7 @@ describe('Application', function(){
     var a1;
 
     beforeEach(function(done){
-      a1 = new Application({bandName:'Test A', date:'2012-03-25'});
+      a1 = new Application({bandName:'Test A', userId: '123451234512345123451234', date: '2012-03-25'});
       var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
       a1.insert(function(){
@@ -113,17 +101,23 @@ describe('Application', function(){
       });
     });
 
-
     it('should update an existing application', function(done){
       var id = a1._id.toString();
       Application.findById(id, function(application){
-        var photo = __dirname + '/../fixtures/theband-copy2.png';
-        application.addPhoto(photo, 'france.jpg');
-        expect(application.photos).to.have.length(1);
-        expect(application.photos[0]).to.equal('/img/testa/france.jpg');
-        application.update(function(err, count){
-          expect(count).to.equal(1);
-          done();
+        var newDate = '2013-04-23';
+        a1.date = new Date(newDate);
+        a1.bandName = 'BadAssBand';
+        //var photo = __dirname + '/../fixtures/theband-copy2.png';
+        //application.addPhoto(photo, 'france.jpg');
+        a1.update(function(count){
+          Application.findById(id, function(record){
+            //expect(application.photos).to.have.length(1);
+            //expect(application.photos[0]).to.equal('/img/testa/france.jpg');
+            expect(record.date).to.deep.equal(a1.date);
+            expect(count).to.equal(1);
+            expect(record.bandName).to.equal('BadAssBand');
+            done();
+          });
         });
       });
     });
@@ -153,7 +147,7 @@ describe('Application', function(){
       it('should find all the applications in the database', function(done){
         Application.findAll(function(applications){
           expect(applications).to.have.length(4);
-          expect(applications[0].photos).to.have.length(0);
+          //expect(applications[0].photos).to.have.length(0);
           done();
         });
       });
@@ -207,6 +201,24 @@ describe('Application', function(){
       });
     });
     ////end of find by before alls
+  });
+
+  describe('#addCover', function(){
+    it('should add a cover to the Application', function(done){
+      var o = {};
+      o.userId = '121212121212121212121212'
+      o.bandName = 'test the Band';
+      o.date = '2010-03-25';
+      var a1 = new Application(o);
+      var oldname = __dirname + '/../fixtures/theband-copy1.png';
+      a1.addCover(oldname);
+      a1.insert(function(err){
+        Application.findById(a1._id.toString(), function(record){
+          expect(a1.cover).to.equal('/img/testtheband/theband-copy1.png');
+          done();
+        });
+      });
+    });
   });
 //end document
 });
