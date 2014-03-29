@@ -21,10 +21,11 @@ exports.index = function(req, res){
 
 exports.create = function(req, res){
   var application = new Application(req.body);
-  console.log('APPLICATION', application);
-  application.addCover(req.files.cover.path);
+  if(req.body.cover){
+    application.addCover(req.files.cover.path);
+  }
   application.insert(function(){
-    res.redirect('/application/show');
+    res.redirect('users/applicant-show');
   });
 };
 

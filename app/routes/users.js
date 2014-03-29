@@ -24,7 +24,6 @@ exports.login = function(req, res){
 exports.authenticate = function(req, res){
   User.findByEmailAndPassword(req.body.email, req.body.password, function(user){
     if(user){
-      console.log('FUCK EVERYTHING', user);
       req.session.regenerate(function(){
         req.session.userId = user._id;
         req.session.save(function(){

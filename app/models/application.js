@@ -13,17 +13,14 @@ var _ = require('lodash');
 function Application(application){
   this.bandName = application.bandName;
   this.photos = application.photos || [];
-  this.bio = application.bio;
-  this.website = application.website;
-  this.facebook = application.facebook;
-  this.youTubePath = application.youTubePath;
-  this.soundCloudPath = application.soundCloudPath;
-  this.sonicbids = application.sonicbids;
+  this.bio = application.bio || ('');
+  this.website = application.website || ('');
+  this.facebook = application.facebook || ('');
+  this.youTubePath = application.youTubePath || ('');
+  this.soundCloudPath = application.soundCloudPath || ('');
+  this.sonicbids = application.sonicbids || ('');
   this.date = new Date(application.date);
-  this.venue = application.venue;
-  this.city = application.city;
   this.userId = application.userId ? new Mongo.ObjectID(application.userId.toString()) : application.userId;
-  this.venueId = application.venueId ? new Mongo.ObjectID(application.venueId.toString()) : application.venueId;
 }
 
 Application.prototype.addCover = function(oldname){
@@ -55,7 +52,8 @@ Application.prototype.insert = function(fn){
   });
 };
 
-Application.destroy = function(_id, fn){
+Application.destroy = function(id, fn){
+  var _id = new Mongo.ObjectID(id);
   applications.remove({_id:_id}, function(err, count){
     fn(count);
   });
@@ -92,11 +90,6 @@ Application.findByUserId = function(userId, fn){
   applications.find({userId:userId}).toArray(function(err, records){
     fn(records);
   });
-};
-
-Application.findByVenueId = function(userId, fn){
-
-
 };
 
 /*

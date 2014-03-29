@@ -95,6 +95,7 @@ describe('Application', function(){
       a1.addCover(oldname);
       a1.insert(function(err){
         expect(a1._id).to.be.instanceof(Mongo.ObjectID);
+        expect(a1._id.toString()).to.have.length(24);
         done();
       });
     });
@@ -162,6 +163,7 @@ describe('Application', function(){
       it('should find a specific application in the database', function(done){
         Application.findById(a1._id.toString(), function(application){
           expect(application._id).to.deep.equal(a1._id);
+          expect(application._id).to.be.instanceof(Mongo.ObjectID);
           expect(application).to.respondTo('addCover');
           done();
         });
@@ -192,13 +194,21 @@ describe('Application', function(){
       });
     });
 
+    describe('.destroy', function(){
+      it('should delete one application by its Id', function(done){
+        Application.destroy(a4._id.toString(), function(count){
+          Application.findById(a4._id.toString(), function(record){
+            expect(record).to.equal(null);
+            expect(count).to.deep.equal(1);
+            done();
+          });
 
-
+        });
+      });
+    });
     ////end of find by before alls
   });
-
-
-  /////end document
+//end document
 });
 /*
     exec(cmd2,  function(){

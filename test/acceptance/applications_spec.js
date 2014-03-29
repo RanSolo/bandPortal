@@ -6,7 +6,7 @@ var request = require('supertest');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var User, Application;
-var sue;
+var bob;
 var cookie;
 
 describe('users', function(){
@@ -33,9 +33,17 @@ describe('users', function(){
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
-        sue = new User({email:'sue@aol.com', password:'abcd'});
-        sue.hashPassword(function(){
-          done();
+        bob = new User({userName: 'Bob', role:'applicant', email:'bob@nomail.com', password:'1234'});
+        bob.register(function(){
+          request(app)
+          .post('/login')
+          .field('email', 'bob@nomail.com')
+          .field('password', '1234')
+          .field('role', 'venue')
+          .end(function(err, res){
+            cookie = res.headers['set-cookie'];
+            done();
+          });
         });
       });
     });
@@ -49,11 +57,12 @@ describe('users', function(){
     });
   });
 
-  /////////?????????????
+
   describe('GET /', function(){
     it('should display the application home page', function(done){
       request(app)
       .get('/')
+
       .expect(200, done);
     });
   });
@@ -62,6 +71,7 @@ describe('users', function(){
     it('should display the new application html page', function(done){
       request(app)
       .get('/applications/new')
+      .set('cookie', cookie)
       .expect(200, done);
     });
   });
@@ -86,18 +96,19 @@ describe('users', function(){
     it('should display the application show page', function(done){
       request(app)
       .get('/applications/' + a1._id.toString())
+      .set('cookie', cookie)
       .expect(200, done);
     });
   });
 
   describe('POST /applications', function(){
     it('should create a new application and send user back to home', function(done){
-      var filename = __dirname + '/../fixtures/theband-copy1.png';
+      //var filename = __dirname + '/../fixtures/theband-copy1.png';
+      var a1 = {bandName:'Test the band', userId:'121212121212121212121212', date:'2012-03-25'};
       request(app)
       .post('/applications')
-      .attach('cover', filename)
-      .field('bandName', 'Test the band')
-      .field('date', '2012-03-25')
+      .send(a1)
+      .set('cookie', cookie)
       .expect(302, done);
     });
   });
