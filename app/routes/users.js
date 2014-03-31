@@ -28,27 +28,26 @@ exports.authenticate = function(req, res){
       req.session.regenerate(function(){
         req.session.userId = user._id;
         req.session.save(function(){
-          res.redirect('/users/' + user._id.toString());
+          res.redirect('/');
         });
       });
     }else{
-      res.redirect('/register');
+      res.redirect('/login', 'Incorrect login, please try again');
     }
   });
 };
 
 exports.show = function(req, res){
   User.findById(req.params.id, function(showUser){
-    User.findAll(function(showUsers){
-      Application.findByUserId(showUser._id, function(showApplications){
-        console.log('UUUUUUUUUUUUUSSSSSSSSEEEEEEERRRRR', showUsers)
-        if(showUser.role === 'Venue'){
-          res.render('users/venue-show', {title: 'venue', showUsers:showUsers, showUser:showUser});
-        }else{
-          res.render('users/applicant-show', {title: 'applicant',  showUser:showUser});
-        }
-      });
+    console.log(res);
+    Application.findByUserId(showUser._id, function(showApplications){
+      if(showUser.role === 'Venue'){
+        res.render('users/venue-show', {title: 'venue', showUser:showUser});
+      }else{
+        res.render('users/applicant-show', {title: 'applicant',  showUser:showUser});
+      }
     });
+
 //    Application.findByUserId(req.params.id, function(){
   //    res.render('users/show');
   //  });

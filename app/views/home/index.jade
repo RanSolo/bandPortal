@@ -8,10 +8,14 @@ block content
       .content
         h2 Welcome to bandPortal
         hr
-        p Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.
-        hr
-        a.button(href='/register') Register to apply to play at our Rock Bar...
-
+        if !user
+          p Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.
+          hr
+          a.button(href='/register') Register to apply to play at our Rock Bar...
+        else
+          a.button(href='/applications/new')  Create your Application now... Good luck we will be judging you harshly!
+          p In publishing and graphic design, lorem ipsum[1] is a placeholder text commonly used to demonstrate the graphic elements of a document or visual presentation. By replacing the distraction of meaningful content with filler text of scrambled Latin it allows viewers to focus on graphical elements such as font, typography, and layout.
+          p The lorem ipsum text is typically a mangled section of De finibus bonorum et malorum, a 1st-century BC Latin text by Cicero, with words altered, added, and removed that make it nonsensical, improper Latin.[1]
 
       //- ul
       //-   li#startRecording: a(href='#') Start Recording

@@ -10,8 +10,8 @@ exports.new = function(req, res){
 
 exports.show = function(req, res){
   Application.findById(req.params.id, function(record){
-    console.log('HHHHHHEEEEEEEYYYYYYYYYUAAAAAALLLL', record)
-     ;
+    // console.log('HHHHHHEEEEEEEYYYYYYYYYUAAAAAALLLL', record)
+    
     // Application.findByUserId(req.params.userID, function)
     res.render('applications/show', {title: 'Application show', record:record});
   });
@@ -51,7 +51,7 @@ exports.create = function(req, res){
     application.addCover(req.files.cover.path);
   }
   application.insert(function(application){
-    console.log('HHHHHHHHHHHHHJJJJJJJJJJJJJJHHHHHHHHJJJJJ', application[0]);
+    // console.log('HHHHHHHHHHHHHJJJJJJJJJJJJJJHHHHHHHHJJJJJ', application[0]);
     res.redirect('/applications/' + application[0]._id.toString());
   });
 };

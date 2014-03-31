@@ -14,9 +14,9 @@
   });
   function iFrameParse(){
     var youtube = $('#youTubeWrapper').text();
-      $('#youTubeWrapper').html(youtube.replace('&lt', '<').replace('&gt', '>'));
+    $('#youTubeWrapper').html(youtube.replace('&lt', '<').replace('&gt', '>'));
     var soundcloud = $('#soundCloudWrapper').text();
-      $('#soundCloudWrapper').html(soundcloud.replace('&lt', '<').replace('&gt', '>'));
+    $('#soundCloudWrapper').html(soundcloud.replace('&lt', '<').replace('&gt', '>'));
     // var result = youtube.substring(0, youtube.length-0);
 
     // console.log(result);

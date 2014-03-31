@@ -15,31 +15,43 @@ html(class='no-js', lang='en')
     nav.top-bar
       ul.name-area
         li.name
-          h1: a(href="/") search
+          h1 --type fun stuff here -->
         li.toggle-topbar.menu-icon
-          a(href="#") Menu
+          a(href="#") Band Portal Forever!
       section.top-bar-section
         ul.left
+          li.divider
           li.name
-            input#search(type='search', placeholder='search...', result='0')
+            input#search(type='search', placeholder='not for searching...', result='0')
+          li.name
+          li.divider
+          li.name
+          li.divider
+          li.name
+          li.divider
+          li.name
+            h1 bandPortal rocking faces since 2014
         ul.right
           li: a(href="/") Home
           li.divider
           if !user
             li: a(href='/register') Register
             li.divider
+            li.name
             li: a(href='/login') Login
-            li.divider
+            li.name
           if user
-            li: a(href='/users/users._id' )= user ? user.userName : 'anon'
+            li.name
             li.divider
             li.has-dropdown.not-click
-              a(href='/') &#9881;
+              a(href='/') &#9881 MENU
               ul.dropdown
                 li: a(href='/applications/new') Applicaton
-                li: a(href='/') Edit Profile
                 li.divider
-                li.has=form
+                li: a(href='/calendar') Calendar
+                li.divider
+                li: a(href='/users/' + user._id.toString()) Edit Profile
+                li.has-form
                   form(action='/logout',method='post')
                     button.alert.tiny.radius.expand Logout
 
