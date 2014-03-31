@@ -108,6 +108,7 @@ describe('users', function(){
       var a1 = {bandName:'Test the band', userId:'121212121212121212121212', date:'2012-03-25'};
       request(app)
       .post('/applications')
+      
       .send(a1)
       .set('cookie', cookie)
       .expect(302, done);

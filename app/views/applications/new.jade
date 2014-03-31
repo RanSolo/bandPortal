@@ -1,4 +1,35 @@
 extends ../shared/template
 
 block content
-  h1= title
+  .content
+    form(action='/applications', method='post', enctype='multipart/form-data')
+      fieldset
+        legend Create application
+        .row
+          .small-6.columns
+            input(type='hidden', name='userId', value=user._id)
+            label Band/Artist  name
+            input(type='text', name='bandName')
+            label Bio/press
+            textarea(name='bio', rows=2, placeholder= 'I was born a poor hacker Chyld...')
+            label website
+            textarea(name='website', rows=2, placeholder= 'www.FoRealDoe.io')
+            //- fieldset
+            //-   legend Contact info
+            //-   .row
+            //-     .small-12.columns
+            label Phone
+            input(name='phone', rows=2, placeholder = 'phone')
+            label Email
+            input(name='email', rows=2, placeholder = 'email')
+
+            label Photo
+            input(type='file', name='photo')
+          .small-6.columns
+            label You on youtube...
+            textarea(name='youTubePath', placeholder='the you in youtube')
+            label Soundcloud
+            textarea(name='soundCloudPath', placeholder='sound cloud')
+            label Choose an available date
+            input(type='date', name='date')
+            button.tiny.radius.expand Submit

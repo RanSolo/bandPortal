@@ -1,35 +1,26 @@
 extends ../shared/template
 
 block content
+  body
   h1= bandPortal
   .row
-    .small-3.columns
-      form
-        input(type='file',)
-    .small-6.columns
-      #calendar
-    .small-6.columns
-  .row
-    .small-2.columns
-      a#start(href='#') Start
-  .row
-    .small-2.columns
-      a#stop(href='#') Stop
-  .row
-    .small-8.columns
+    .small-12.columns
+      .content
+        h2 Welcome to bandPortal
+        hr
+        p Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.
+        hr
+        a.button(href='/register') Register to apply to play at our Rock Bar...
+
+
       //- ul
       //-   li#startRecording: a(href='#') Start Recording
       //-   li#stopRecording: a(href='#') Stop recording
       //-   li#playback: a(href='#') Playback
       //-   li#upload: a(href='#') Upload
       //-   li: p.status
-
-  #player
-  #youTube
-  <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&color=ff5500"></iframe>
-  <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
+  //- #youTube
+  //- <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&color=ff5500"></iframe>
+  //- <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
 
   ul#results
-
-  form
-    fieldset

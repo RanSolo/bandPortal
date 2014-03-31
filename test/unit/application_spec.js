@@ -78,6 +78,8 @@ describe('Application', function(){
       var o = {};
       o.bandName = 'Test band songs';
       o.date = '2010-03-25';
+      o.userId = '121212121212121212121212';
+      console.log('OOOOOOOOOOOOOOOOOOOOOO', o);
       var a1 = new Application(o);
       var oldname = __dirname + '/../fixtures/theband-copy1.png';
       a1.addCover(oldname);
@@ -206,7 +208,7 @@ describe('Application', function(){
   describe('#addCover', function(){
     it('should add a cover to the Application', function(done){
       var o = {};
-      o.userId = '121212121212121212121212'
+      o.userId = '121212121212121212121212';
       o.bandName = 'test the Band';
       o.date = '2010-03-25';
       var a1 = new Application(o);

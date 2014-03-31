@@ -12,16 +12,18 @@ var _ = require('lodash');
 
 function Application(application){
   this.bandName = application.bandName;
-  //this.photos = application.photos || [];
+  this.photos = application.photos || [];
   //this.cover = application.cover || ('');
   this.bio = application.bio || ('');
   this.website = application.website || ('');
   this.facebook = application.facebook || ('');
   this.youTubePath = application.youTubePath || ('');
   this.soundCloudPath = application.soundCloudPath || ('');
-  this.sonicbids = application.sonicbids || ('');
+  this.epk = application.epk || ('');
   this.date = new Date(application.date);
-  this.userId = application.userId ? new Mongo.ObjectID(application.userId.toString()) : application.userId;
+  this.userId = application.userId ? new Mongo.ObjectID(application.userId) : application.userId;
+  this.phone = application.phone ||('');
+  this.email = application.email || ('');
 }
 
 Application.prototype.addCover = function(oldname){
@@ -60,8 +62,10 @@ Application.prototype.addPhoto = function(oldpath, name){
 */
 Application.prototype.insert = function(fn){
   var self = this;
-  applications.insert(self, function(err, records){
-    fn(records);
+  applications.insert(self, function(err, record){
+    // User.applications.push(record);
+    fn(record);
+
   });
 };
 
@@ -73,7 +77,6 @@ Application.destroy = function(id, fn){
 };
 
 Application.prototype.update = function(fn){
-  console.log('FNFNFNFNFNFNFNFNFNFNFNFNFNFNFN', fn);
   applications.update({_id:this._id}, this, function(err, count){
     fn(count);
   });
@@ -100,6 +103,7 @@ Application.findByDate = function(date, fn){
 };
 
 Application.findByUserId = function(userId, fn){
+  console.log(':FSLKDJ:FLKSDJF:SLKJFS:DLKJF:DSLKJFS:LDKJFS:LDKJFS:LDKJF:SDLKJFS:DLKJ', userId);
   applications.find({userId:userId}).toArray(function(err, records){
     fn(records);
   });

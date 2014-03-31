@@ -4,19 +4,18 @@ html(class='no-js', lang='en')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title= bandPortal
+    title=bandPortal
     link(rel='stylesheet', href='/css/normalize.css')
     link(rel='stylesheet', href='/css/foundation.css')
     link(rel='stylesheet', href='/less/app.css')
-    link(rel='stylesheet', href='/css/custom-theme/jquery-ui.css')
+    link(rel='stylesheet', href='/css/mint-choc/jquery-ui.css')
     link(rel='stylesheet', href='/css/fullcalendar.css')
     link(rel='stylesheet', href='/css/fullcalendar.print.css')
     script(src='/js/vendor/modernizr.js')
-  body
     nav.top-bar
       ul.name-area
         li.name
-          h1: a(href="/") title
+          h1: a(href="/") search
         li.toggle-topbar.menu-icon
           a(href="#") Menu
       section.top-bar-section
@@ -27,55 +26,51 @@ html(class='no-js', lang='en')
           li: a(href="/") Home
           li.divider
           if !user
-            li: a(href="/register") Register
+            li: a(href='/register') Register
             li.divider
-            li: a(href="/login") Login
+            li: a(href='/login') Login
             li.divider
           if user
-            li: a(href='/profile') profile
-            li.divider
-            li: a(href='/')= user ? user.userName : 'anon'
+            li: a(href='/users/users._id' )= user ? user.userName : 'anon'
             li.divider
             li.has-dropdown.not-click
               a(href='/') &#9881;
               ul.dropdown
-                li: a#showA Applicaton
+                li: a(href='/applications/new') Applicaton
                 li: a(href='/') Edit Profile
-                li divider
+                li.divider
                 li.has=form
                   form(action='/logout',method='post')
                     button.alert.tiny.radius.expand Logout
-    .row
-      .small-12.columns.hide
-        form(action='/applications', method='post', enctype='multipart/form-data')
-          fieldset
-            legend Create application
-            input(type='hidden', value='application._id')
-            .row
-              .small-5.columns
-                label Band/Artist  name
-                input(type='text', name='bandName')
-                label Contact info
-                textarea(name='contactInfo',rows=2, placeholder = 'phone/email')
-                label Bio/press
-                textarea(name='bio', rows=2, placeholder= 'I was born a poor hacker Chyld...')
-                label links - separate by commas
-                textarea(name='links', rows=2, placeholder= 'www.FoRealDoe.io')
-                label Mp3
-                input(type='file', name='song')
-                label Photo
-                input(type='file', name='cover')
 
-              .small-5.columns
-                label You on youtube...
-                textarea(name='youTubePath', placeholder='the you in youtube')
-                label Soundcloud
-                textarea(name='soundCloudPath', placeholder='sound cloud')
-                input(type='hidden', name entryDate)
-                button.tiny.radius.expand Submit
+  //- form(action='/applications', method='post', enctype='multipart/form-data')
+  //-   fieldset
+  //-     legend Create application
+  //-     input(type='hidden', value='application._id')
+  //-     .row
+  //-       .small-5.columns
+  //-         label Band/Artist  name
+  //-         input(type='text', name='bandName')
+  //-         label Contact info
+  //-         textarea(name='contactInfo',rows=2, placeholder = 'phone/email')
+  //-         label Bio/press
+  //-         textarea(name='bio', rows=2, placeholder= 'I was born a poor hacker Chyld...')
+  //-         label links - separate by commas
+  //-         textarea(name='links', rows=2, placeholder= 'www.FoRealDoe.io')
+  //-         label Photo
+  //-         input(type='file', name='cover')
+  //-
+  //-       .small-5.columns
+  //-         label You on youtube...
+  //-         textarea(name='youTubePath', placeholder='the you in youtube')
+  //-         label Soundcloud
+  //-         textarea(name='soundCloudPath', placeholder='sound cloud')
+  //-         input(type='hidden', name entryDate)
+  //-         button.tiny.radius.expand Submit
 
   .row
     .small-8.columns
+
       //- #toolbar.ui-widget-header myPod
       //-   button#beginning got to beginning
       //-   button#rewind rewind
@@ -87,12 +82,12 @@ html(class='no-js', lang='en')
       //-   input#shuffle(type='checkbox')
       //-   #mySliderDiv
     .small-4.columns
-      ul
-      li#startRecording: a(href='#') Start recording
-      li#stopRecording: a(href='#') Stop recording
-      li#playback: a(href='#') Playbeck
-      li#upload: a(href='#') Upload
-      p.status
+      //- ul
+      //-   li#startRecording: a(href='#') Start recording
+      //-   li#stopRecording: a(href='#') Stop recording
+      //-   li#playback: a(href='#') Playbeck
+      //-   li#upload: a(href='#') Upload
+      //-   p.status
   .row
     .small-12.columns
       block content

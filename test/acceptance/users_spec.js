@@ -65,7 +65,7 @@ describe('users', function(){
       .field('role', 'guest')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /login');
         done();
       });
     });

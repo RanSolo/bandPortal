@@ -1,4 +1,33 @@
 extends ../shared/template
 
 block content
-  h4=title
+  h1= title
+  h1 for realdo
+  h1= showUser.email
+  h1= showUser.role
+  h1= showUser.userName
+  //- h1= showApplication._id
+  each showUser in showUsers
+    li= showUser
+
+
+.row
+  .small-8.columns
+    form(action='/profile', method='post', enctype='multipart/form-data')
+      fieldset
+        legend User info
+        input(type='hidden', name='_method', value='put')
+        .row
+          .small-12.columns
+            .row
+              .small-6.columns
+                label Name
+                input(name='userName', type='text', value= user.userName)
+              .small-6.columns
+                label Email
+                input(name='email', type='text', value= user.email)
+            .row
+              .small-6.columns
+              .small-6.columns
+                button.small.radius Submit
+  .small-4.columns

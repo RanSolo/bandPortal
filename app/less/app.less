@@ -1,9 +1,22 @@
-@bg-color: #000000;
-@color1: #6EF9FF;
+@bg-color: #ffffff;
+@color1: #BAA;
 
 body{
-  background-color: @bg-color;
+  word-wrap: break-word;
+  // background-color: @bg-color;
+  background: url("http://www.miami.com/sites/migration.miami.com/files/images/broward_02_0.gallery.jpg") fixed no-repeat 50% 0 @bg-color;
+  background-size: cover;
+
 }
+.loginForm{
+  margin: 1em auto;
+  display: block;
+  width: 50%;
+
+}
+.content{padding: 2em; background-color: white; margin: 4em auto;
+  border-radius: 8px;
+  box-shadow: 0 0 8px #000}
 h1{
   color: @color1;
 }
@@ -11,7 +24,9 @@ h1{
   background-size: cover;
   height: 400px;
 }
-
+#resuts{
+  width: 50%;
+}
 #stopRecording, #playBack, #upload{
   display: none;
 }
@@ -32,3 +47,22 @@ h1{
     display: inline;
   }
 
+#datePicker{
+
+    width: 50%;
+}
+
+#soundCloudWrapper, #youTubeWrapper{
+  width: 60%;
+
+  margin: 1em auto;
+
+
+}
+iframe, embed, object{
+  max-width: 100%;
+  margin: 0, auto;
+  display: block;
+
+
+}

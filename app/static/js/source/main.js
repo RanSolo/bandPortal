@@ -12,17 +12,29 @@
     client_id: '7d6b9bbba79c13d598cefdd1970a5fba',
     redirect_uri: 'http://10.0.0.163:4000/login'
   });
+  function iFrameParse(){
+    var youtube = $('#youTubeWrapper').text();
+      $('#youTubeWrapper').html(youtube.replace('&lt', '<').replace('&gt', '>'));
+    var soundcloud = $('#soundCloudWrapper').text();
+      $('#soundCloudWrapper').html(soundcloud.replace('&lt', '<').replace('&gt', '>'));
+    // var result = youtube.substring(0, youtube.length-0);
+
+    // console.log(result);
+
+    // $('#youTubeWrapper').html(result);
+  }
+  iFrameParse();
 
   $(document).ready(initialize);
 
   function initialize(){
     $(document).foundation();
-    $('#toggleApplication').click(toggleApplication);
+      //  $('#toggleUpdateUser').click(toggleUpdateUser);
   //////event handlers
 ///////start recording ///////
 ///////hides start shows stop
 ///////calls SC.record and updates timer
-    $('#submitApplication').click(youTubeIt, fileUpload);
+    // $('#submitApplication').click(youTubeIt, fileUpload);
 
     $('#startRecording a').click(function(e){
       updateTimer(0);
@@ -83,16 +95,14 @@
     });
     //////end init/////
     /////submit functions////
-    function youTubeIt(path){
-      console.log(path);
-    }
-    function toggleApplication(event){
-      alert('hey');
-      $('a#createApplication').toggleClass('hide');
-      event.preventdefault();
-    }
-    ////jquery ui/////////
-    //
+
+    // function toggleUserUpdate(event){
+    //   alert('hey');
+    //   $('a#updateUser').toggleClass('hide');
+    //   event.preventdefault();
+    // // }
+    // ////jquery ui/////////
+    // //
     $('#cal').datepicker();
 
     $('#calendar').fullCalendar({
@@ -108,19 +118,17 @@
       $('.status').text(SC.Helper.millisecondsToHMS(ms));
     }
 
-
-
     SC.get('/tracks/313104', function(track){
       SC.oEmbed(track.permalink_url, document.getElementById('player'));
       console.log(track.permalink_url);
     });
 
-    SC.get('/tracks', { genres:'ambient' }, function(tracks) {
-
-      $(tracks).each(function(index, track) {
-        $('#results').append($('<li></li>').html(track.name + ' - ' + track.genre));
-      });
-    });
+    // SC.get('/tracks', { genres:'ambient' }, function(tracks) {
+    //
+    //   $(tracks).each(function(index, track) {
+    //     $('#results').append($('<li></li>').html(track.name + ' - ' + track.genre));
+    //   });
+    // });
 
     SC.stream('/tracks/293', function(sound){
       $('#start').click(function(e){
@@ -133,20 +141,20 @@
       });
     });
 
-    function fileUpload(track){
-      SC.connect(function() {
-        SC.record({
-          start: function() {
-            window.setTimeout(function() {
-              SC.recordStop();
-              SC.recordUpload({
-                track: { name: 'This is my sound' }
-              });
-            }, 5000);
-          }
-        });
-      });
-    }
+    // function fileUpload(track){
+    //   SC.connect(function() {
+    //     SC.record({
+    //       start: function() {
+    //         window.setTimeout(function() {
+    //           SC.recordStop();
+    //           SC.recordUpload({
+    //             track: { name: 'This is my sound' }
+    //           });
+    //         }, 5000);
+    //       }
+    //     });
+    //   });
+    // }
     /*
     <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132753131&color=ff5500"></iframe>
 

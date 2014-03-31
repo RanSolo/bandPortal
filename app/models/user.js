@@ -25,6 +25,7 @@ function User(user){
   this.password = user.password;
   this.role = user.role;
   this.applications = user.applications || [];
+  this._id = user._id ? Mongo.ObjectID(user._id.toString()) : undefined;
 }
 
 User.prototype.register = function(fn){
@@ -45,6 +46,12 @@ User.prototype.register = function(fn){
   });
 };
 
+
+User.prototype.update = function(fn){
+  users.update({_id:this._id}, this, function(err, count){
+    fn(count);
+  });
+};
 
 User.findByEmailAndPassword = function(email, password, fn){
   users.findOne({email:email}, function(err, user){
@@ -84,5 +91,11 @@ User.findById = function(Id, fn){
   var _id = new Mongo.ObjectID(Id);
   users.findOne({_id:_id}, function(err, record){
     fn(record);
+  });
+};
+
+User.findAll = function(fn){
+  users.find().toArray(function(err, records){
+    fn(records);
   });
 };

@@ -24,6 +24,7 @@ function load(app, fn){
   app.get('/login', d, users.login);
   app.post('/login', d, users.authenticate);
   app.get('/users/:id', d, users.show);
+  app.put('/users/:id', d, users.update);
   //app.get('/applications', d,  applications.index);
   app.get('/applications/new', d, applications.new);
   app.get('/applications/:id', d, applications.show);

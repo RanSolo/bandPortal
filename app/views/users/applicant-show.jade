@@ -1,4 +1,46 @@
 extends ../shared/template
 
 block content
-  h4= title
+  .content
+    h1= title + ' admin'
+    a.button(href='/applications/new') Create Applications
+    //- h1= showUser.role
+    h3= showUser.email
+    h4= showUser.userName
+    .row
+      .small-7.left
+      .small-5.right
+      p.right Lucas ipsum dolor sit amet jango frozian dor padmé darth wedge -1b zabrak braxant vong. Mon padmé bane askajian elom priapulin omas tagge pa'lowick. Tharin ti yevetha shaddaa cerean wroonian owen bail. Lannik shaddaa daala kael nass. Jettster mon ruurian dagobah grodin moff tion. Pellaeon sio quermian duro gizka barriss.
+      p  Gev porkins dexter tython terrik. Rendar aramandi olié breha felth artaru polis solo. Yuzzum rune tharin mustafarian gorog dunwell boz. Anakin sabé allie chagrian. Myneyrsh iridonian soontir kenobi massassi secura joh.Bibble seerdon ima-gun tof kushiban argazdan gotal kal gotal. Carlist tagge rukh fosh jerec b4-d4 barabel anakin caedus. R4-p17 maris ackbar vos.
+      form(action='/users/' + user._id, method='post', enctype='multipart/form-data')
+        fieldset
+          legend User info
+          input(type='hidden', name='userId', value='userId')
+          input(type='hidden', name='_method', value='put')
+          .row
+            .small-12.columns
+              .row
+                .small-6.columns
+                  input(type='hidden', name='userId', value='userId')
+                  label userName
+                  input(name='userName', type='text', value= showUser.userName)
+                  label password
+                  input(name='pssword', type='password')
+                .small-6.columns
+                  label Email
+                  input(name='email', type='text', value= user.email)
+              .row
+                .small-12.columns
+                  button.expand.alert Update Profile
+          .row
+              .small-12.columns
+      if user.role
+
+      #log
+
+      //- a.btn(href='/applications/' +  ) Show Applications
+
+                //- each application in applications
+
+
+    .small-4.columns
